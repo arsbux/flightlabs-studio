@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Loading... — Flight Labs Studio</title>
+    <meta name="description" id="page-description" content="Flight Labs Studio blog post">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        marker: ['"Permanent Marker"', 'cursive'],
+                        hand: ['Caveat', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        .neo-btn {
+            border: 3px solid #1a1a1a;
+            box-shadow: 4px 4px 0 #1a1a1a;
+            transition: all 0.15s ease;
+        }
+        .neo-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #1a1a1a;
+        }
+        .neo-card {
+            border: 3px solid #1a1a1a;
+            box-shadow: 6px 6px 0 #1a1a1a;
+            background: white;
+        }
+        
+        /* Blog content styling */
+        .blog-content {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        .blog-content h1 { font-size: 2.5em; font-weight: 900; margin: 1.5em 0 0.5em; }
+        .blog-content h2 { font-size: 2em; font-weight: 800; margin: 1.5em 0 0.5em; }
+        .blog-content h3 { font-size: 1.5em; font-weight: 700; margin: 1.5em 0 0.5em; }
+        .blog-content h4 { font-size: 1.25em; font-weight: 700; margin: 1.5em 0 0.5em; }
+        .blog-content p { margin: 1em 0; }
+        .blog-content ul, .blog-content ol { margin: 1em 0; padding-left: 2em; }
+        .blog-content li { margin: 0.5em 0; }
+        .blog-content blockquote {
+            border-left: 4px solid #1a1a1a;
+            padding-left: 1.5em;
+            margin: 1.5em 0;
+            font-style: italic;
+            color: #57534e;
+        }
+        .blog-content pre {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 1.5em;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+        }
+        .blog-content code {
+            background: #f5f5f4;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        .blog-content pre code {
+            background: transparent;
+            padding: 0;
+        }
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 2em 0;
+            border: 3px solid #1a1a1a;
+        }
+        .blog-content a {
+            color: #e63946;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .blog-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2em 0;
+        }
+        .blog-content table th,
+        .blog-content table td {
+            border: 2px solid #1a1a1a;
+            padding: 0.75em;
+            text-align: left;
+        }
+        .blog-content table th {
+            background: #f5f5f4;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body class="bg-stone-50 text-stone-900 font-sans">
+
+    <!-- Navbar -->
+    <nav class="fixed top-2 sm:top-4 left-0 w-full z-50 pointer-events-none">
+        <div class="max-w-5xl mx-auto flex justify-center pointer-events-auto px-2 sm:px-4">
+            <div class="bg-white neo-card px-2 sm:px-3 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full sm:w-auto">
+                <a href="/" class="px-2 sm:px-4 py-1.5 sm:py-2 font-marker text-base sm:text-xl tracking-tight hover:text-red-600 transition-colors">
+                    FLIGHT LABS
+                </a>
+
+                <div class="hidden md:flex gap-1">
+                    <a href="/#studio" class="px-4 py-2 font-bold text-sm hover:bg-yellow-200 transition-colors">Studio</a>
+                    <a href="/#projects" class="px-4 py-2 font-bold text-sm hover:bg-yellow-200 transition-colors">Projects</a>
+                    <a href="/ideas/" class="px-4 py-2 font-bold text-sm bg-yellow-200">Ideas</a>
+                    <a href="/#pricing" class="px-4 py-2 font-bold text-sm hover:bg-yellow-200 transition-colors">Pricing</a>
+                </div>
+
+                <a href="https://flightlabs.agency" class="neo-btn bg-black text-white px-3 sm:px-5 py-1.5 sm:py-2 font-bold text-xs sm:text-sm">
+                    Start a Project
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading State -->
+    <div id="loading" class="min-h-screen flex items-center justify-center">
+        <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-stone-300 border-t-red-600"></div>
+            <p class="mt-4 text-stone-500 font-hand">Loading post...</p>
+        </div>
+    </div>
+
+    <!-- Post Content -->
+    <article id="post-content" class="hidden">
+        <!-- Featured Image -->
+        <div id="featured-image-container" class="hidden">
+            <div class="w-full h-[50vh] bg-stone-200 border-b-3 border-black overflow-hidden">
+                <img id="featured-image" src="" alt="" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <!-- Post Header -->
+        <header class="max-w-3xl mx-auto px-4 pt-32 pb-8 sm:pt-40 sm:pb-12">
+            <div class="flex items-center gap-3 text-sm text-stone-500 mb-6">
+                <span id="post-date"></span>
+                <span>•</span>
+                <span id="post-reading-time"></span>
+            </div>
+            <h1 id="post-title" class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight"></h1>
+            <p id="post-excerpt" class="text-xl text-stone-600 font-hand"></p>
+        </header>
+
+        <!-- Post Body -->
+        <div class="max-w-3xl mx-auto px-4 pb-16">
+            <div id="post-body" class="blog-content"></div>
+        </div>
+
+        <!-- Back to Blog -->
+        <div class="max-w-3xl mx-auto px-4 pb-24">
+            <a href="/ideas/" class="neo-btn bg-white text-black px-6 py-3 font-bold inline-flex items-center gap-2">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                Back to Ideas
+            </a>
+        </div>
+    </article>
+
+    <!-- Error State -->
+    <div id="error" class="hidden min-h-screen flex items-center justify-center">
+        <div class="text-center max-w-md px-4">
+            <h1 class="text-4xl font-black mb-4">Post Not Found</h1>
+            <p class="text-stone-600 mb-8">The post you're looking for doesn't exist or has been removed.</p>
+            <a href="/ideas/" class="neo-btn bg-black text-white px-6 py-3 font-bold inline-flex items-center gap-2">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                Back to Ideas
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Supabase Configuration v3.0 - Always initialize fresh
+        const SUPABASE_URL = 'https://nckdgmtgdwhraspjynwd.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja2RnbXRnZHdocmFzcGp5bndkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODgyOTEsImV4cCI6MjA4MTE2NDI5MX0._JQQ6JurL-fDuJiYw2oqTmw_IQfLzmlJbklYfddVYY8';
+        
+        // Initialize Supabase client - always create fresh to avoid cache issues
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Helper functions
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        function getReadingTime(content) {
+            const wordsPerMinute = 200;
+            const words = content.trim().split(/\s+/).length;
+            const minutes = Math.ceil(words / wordsPerMinute);
+            return `${minutes} min read`;
+        }
+
+        lucide.createIcons();
+
+        // Get slug from URL
+        const urlPath = window.location.pathname;
+        const slug = urlPath.split('/').pop().replace('.html', '');
+
+        // Load post
+        async function loadPost() {
+            try {
+                const { data: post, error } = await supabaseClient
+                    .from('blog_posts')
+                    .select('*')
+                    .eq('slug', slug)
+                    .eq('published', true)
+                    .single();
+
+                if (error) throw error;
+
+                // Update page title and meta
+                document.getElementById('page-title').textContent = `${post.title} — Flight Labs Studio`;
+                document.getElementById('page-description').content = post.excerpt || post.content.substring(0, 160);
+
+                // Update post content
+                document.getElementById('post-title').textContent = post.title;
+                document.getElementById('post-date').textContent = formatDate(post.created_at);
+                document.getElementById('post-reading-time').textContent = getReadingTime(post.content);
+                document.getElementById('post-body').innerHTML = post.content;
+
+                if (post.excerpt) {
+                    document.getElementById('post-excerpt').textContent = post.excerpt;
+                }
+
+                if (post.featured_image) {
+                    document.getElementById('featured-image').src = post.featured_image;
+                    document.getElementById('featured-image').alt = post.title;
+                    document.getElementById('featured-image-container').classList.remove('hidden');
+                }
+
+                // Show content, hide loading
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('post-content').classList.remove('hidden');
+
+                lucide.createIcons();
+            } catch (error) {
+                console.error('Error loading post:', error);
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error').classList.remove('hidden');
+                lucide.createIcons();
+            }
+        }
+
+        loadPost();
+    </script>
+</body>
+
+</html>

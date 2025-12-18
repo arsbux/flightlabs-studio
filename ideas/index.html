@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ideas — Flight Labs Studio</title>
+    <meta name="description" content="Thoughts, case studies, and insights from Flight Labs Studio.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        marker: ['"Permanent Marker"', 'cursive'],
+                        hand: ['Caveat', 'cursive'],
+                    },
+                    colors: {
+                        marker: {
+                            black: '#1a1a1a',
+                            red: '#e63946',
+                            blue: '#2563eb',
+                            green: '#16a34a',
+                            orange: '#ea580c',
+                            purple: '#7c3aed',
+                            pink: '#db2777',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        .neo-btn {
+            border: 3px solid #1a1a1a;
+            box-shadow: 4px 4px 0 #1a1a1a;
+            transition: all 0.15s ease;
+        }
+        .neo-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #1a1a1a;
+        }
+        .neo-card {
+            border: 3px solid #1a1a1a;
+            box-shadow: 6px 6px 0 #1a1a1a;
+            background: white;
+        }
+        .marker-underline {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'%3E%3Cpath d='M2 8 Q50 4 100 8 T198 6' stroke='%23e63946' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-size: 100% 12px;
+            padding-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body class="bg-stone-50 text-stone-900 font-sans">
+
+    <!-- Navbar -->
+    <nav class="fixed top-2 sm:top-4 left-0 w-full z-50 pointer-events-none">
+        <div class="max-w-5xl mx-auto flex justify-center pointer-events-auto px-2 sm:px-4">
+            <div class="bg-white neo-card px-2 sm:px-3 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full sm:w-auto">
+                <a href="/" class="px-2 sm:px-4 py-1.5 sm:py-2 font-marker text-base sm:text-xl tracking-tight hover:text-marker-red transition-colors">
+                    FLIGHT LABS
+                </a>
+
+                <div class="hidden md:flex gap-1">
+                    <a href="/#studio" class="px-4 py-2 font-bold text-sm hover:bg-yellow-200 transition-colors">Studio</a>
+                    <a href="/#projects" class="px-4 py-2 font-bold text-sm hover:bg-yellow-200 transition-colors">Projects</a>
+                    <a href="/ideas/" class="px-4 py-2 font-bold text-sm bg-yellow-200">Ideas</a>
+                    <a href="/#pricing" class="px-4 py-2 font-bold text-sm hover:bg-yellow-200 transition-colors">Pricing</a>
+                </div>
+
+                <a href="https://flightlabs.agency" class="neo-btn bg-marker-black text-white px-3 sm:px-5 py-1.5 sm:py-2 font-bold text-xs sm:text-sm">
+                    Start a Project
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 sm:pt-40 sm:pb-24 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-4 sm:mb-6">
+                <span class="marker-underline">Ideas</span>
+            </h1>
+            <p class="text-xl sm:text-2xl text-stone-600 font-hand">
+                Thoughts, case studies, and insights from the studio.
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="pb-24 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Blog posts will be loaded here -->
+                <div class="col-span-full text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-stone-300 border-t-marker-red"></div>
+                    <p class="mt-4 text-stone-500 font-hand">Loading posts...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Supabase Configuration v3.0 - Always initialize fresh
+        const SUPABASE_URL = 'https://nckdgmtgdwhraspjynwd.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja2RnbXRnZHdocmFzcGp5bndkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODgyOTEsImV4cCI6MjA4MTE2NDI5MX0._JQQ6JurL-fDuJiYw2oqTmw_IQfLzmlJbklYfddVYY8';
+        
+        // Initialize Supabase client - always create fresh to avoid cache issues
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Helper functions
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        function getReadingTime(content) {
+            const wordsPerMinute = 200;
+            const words = content.trim().split(/\s+/).length;
+            const minutes = Math.ceil(words / wordsPerMinute);
+            return `${minutes} min read`;
+        }
+
+        lucide.createIcons();
+
+        // Load blog posts
+        async function loadBlogPosts() {
+            try {
+                const { data: posts, error } = await supabaseClient
+                    .from('blog_posts')
+                    .select('*')
+                    .eq('published', true)
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                const blogGrid = document.getElementById('blog-grid');
+                
+                if (posts.length === 0) {
+                    blogGrid.innerHTML = `
+                        <div class="col-span-full text-center py-12">
+                            <p class="text-stone-500 font-hand text-xl">No posts yet. Check back soon!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                blogGrid.innerHTML = posts.map(post => `
+                    <article class="neo-card bg-white overflow-hidden hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0_#1a1a1a] transition-all cursor-pointer group">
+                        <a href="/ideas/${post.slug}.html">
+                            ${post.featured_image ? `
+                                <div class="aspect-video bg-stone-200 border-b-3 border-black overflow-hidden">
+                                    <img src="${post.featured_image}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                </div>
+                            ` : `
+                                <div class="aspect-video bg-gradient-to-br from-stone-200 to-stone-300 border-b-3 border-black flex items-center justify-center">
+                                    <i data-lucide="file-text" class="w-16 h-16 text-stone-400"></i>
+                                </div>
+                            `}
+                            <div class="p-6">
+                                <div class="flex items-center gap-2 text-xs text-stone-500 mb-3">
+                                    <span>${formatDate(post.created_at)}</span>
+                                    <span>•</span>
+                                    <span>${getReadingTime(post.content)}</span>
+                                </div>
+                                <h2 class="text-xl font-black mb-2 group-hover:text-marker-red transition-colors">${post.title}</h2>
+                                <p class="text-stone-600 text-sm line-clamp-3">${post.excerpt || post.content.substring(0, 150) + '...'}</p>
+                            </div>
+                        </a>
+                    </article>
+                `).join('');
+
+                lucide.createIcons();
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                document.getElementById('blog-grid').innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <p class="text-red-500 font-hand text-xl">Error loading posts. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Load posts on page load
+        loadBlogPosts();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Supabase Connection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-stone-50 p-8">
+    <div class="max-w-2xl mx-auto">
+        <h1 class="text-4xl font-black mb-8">Supabase Connection Test</h1>
+        
+        <div id="status" class="bg-white border-3 border-black p-6 mb-6">
+            <div class="flex items-center gap-3">
+                <div class="animate-spin rounded-full h-8 w-8 border-4 border-stone-300 border-t-black"></div>
+                <span class="font-bold">Testing connection...</span>
+            </div>
+        </div>
+
+        <div id="results" class="hidden space-y-4">
+            <!-- Results will appear here -->
+        </div>
+
+        <div class="mt-8 p-4 bg-yellow-100 border-2 border-yellow-600">
+            <h3 class="font-bold mb-2">Configuration Check</h3>
+            <div class="text-sm space-y-1">
+                <div>URL: <code id="config-url" class="bg-white px-2 py-1"></code></div>
+                <div>Key: <code id="config-key" class="bg-white px-2 py-1"></code></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Supabase Configuration v3.0 - Always initialize fresh
+        const SUPABASE_URL = 'https://nckdgmtgdwhraspjynwd.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja2RnbXRnZHdocmFzcGp5bndkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODgyOTEsImV4cCI6MjA4MTE2NDI5MX0._JQQ6JurL-fDuJiYw2oqTmw_IQfLzmlJbklYfddVYY8';
+        
+        // Initialize Supabase client - always create fresh to avoid cache issues
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Display config (safely)
+        document.getElementById('config-url').textContent = SUPABASE_URL || 'NOT SET';
+        document.getElementById('config-key').textContent = SUPABASE_ANON_KEY ? SUPABASE_ANON_KEY.substring(0, 20) + '...' : 'NOT SET';
+
+        async function testConnection() {
+            const results = [];
+            
+            // Test 1: Check if Supabase is initialized
+            try {
+                if (!supabaseClient) {
+                    throw new Error('Supabase client not initialized');
+                }
+                results.push({
+                    test: 'Supabase Client',
+                    status: 'success',
+                    message: 'Client initialized successfully'
+                });
+            } catch (error) {
+                results.push({
+                    test: 'Supabase Client',
+                    status: 'error',
+                    message: error.message
+                });
+            }
+
+            // Test 2: Check blog_posts table
+            try {
+                const { data, error } = await supabaseClient
+                    .from('blog_posts')
+                    .select('count');
+                
+                if (error) throw error;
+                
+                results.push({
+                    test: 'blog_posts Table',
+                    status: 'success',
+                    message: 'Table accessible'
+                });
+            } catch (error) {
+                results.push({
+                    test: 'blog_posts Table',
+                    status: 'error',
+                    message: error.message
+                });
+            }
+
+            // Test 3: Check email_subscribers table
+            try {
+                const { data, error } = await supabaseClient
+                    .from('email_subscribers')
+                    .select('count');
+                
+                if (error) throw error;
+                
+                results.push({
+                    test: 'email_subscribers Table',
+                    status: 'success',
+                    message: 'Table accessible'
+                });
+            } catch (error) {
+                results.push({
+                    test: 'email_subscribers Table',
+                    status: 'error',
+                    message: error.message
+                });
+            }
+
+            // Test 4: Try to read published posts
+            try {
+                const { data, error } = await supabaseClient
+                    .from('blog_posts')
+                    .select('*')
+                    .eq('published', true);
+                
+                if (error) throw error;
+                
+                results.push({
+                    test: 'Read Published Posts',
+                    status: 'success',
+                    message: `Found ${data.length} published post(s)`
+                });
+            } catch (error) {
+                results.push({
+                    test: 'Read Published Posts',
+                    status: 'error',
+                    message: error.message
+                });
+            }
+
+            // Test 5: Check storage bucket (blog_images with underscore)
+            try {
+                const { data, error } = await supabaseClient.storage
+                    .from('blog_images')
+                    .list('', { limit: 1 });
+                
+                if (error) throw error;
+                
+                results.push({
+                    test: 'Storage Bucket (blog_images)',
+                    status: 'success',
+                    message: 'Bucket accessible and ready for uploads'
+                });
+            } catch (error) {
+                results.push({
+                    test: 'Storage Bucket (blog_images)',
+                    status: 'warning',
+                    message: 'Bucket not found or not accessible. Create it in Storage settings.'
+                });
+            }
+
+            // Display results
+            displayResults(results);
+        }
+
+        function displayResults(results) {
+            document.getElementById('status').classList.add('hidden');
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.classList.remove('hidden');
+
+            const allSuccess = results.every(r => r.status === 'success');
+            
+            // Summary
+            const summary = document.createElement('div');
+            summary.className = `p-6 border-3 border-black ${allSuccess ? 'bg-green-100' : 'bg-red-100'}`;
+            summary.innerHTML = `
+                <h2 class="text-2xl font-black mb-2">
+                    ${allSuccess ? '✅ All Tests Passed!' : '❌ Some Tests Failed'}
+                </h2>
+                <p class="text-sm">
+                    ${allSuccess 
+                        ? 'Your Supabase connection is working correctly. You can start using the blog system!' 
+                        : 'Please check the errors below and refer to SUPABASE_SETUP.md for help.'}
+                </p>
+            `;
+            resultsDiv.appendChild(summary);
+
+            // Individual results
+            results.forEach(result => {
+                const div = document.createElement('div');
+                const bgColor = result.status === 'success' ? 'bg-white' : result.status === 'warning' ? 'bg-yellow-50' : 'bg-red-50';
+                const icon = result.status === 'success' ? '✅' : result.status === 'warning' ? '⚠️' : '❌';
+                
+                div.className = `p-4 border-2 border-black ${bgColor}`;
+                div.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <span class="text-2xl">${icon}</span>
+                        <div class="flex-1">
+                            <h3 class="font-bold">${result.test}</h3>
+                            <p class="text-sm text-stone-600">${result.message}</p>
+                        </div>
+                    </div>
+                `;
+                resultsDiv.appendChild(div);
+            });
+
+            // Next steps
+            const nextSteps = document.createElement('div');
+            nextSteps.className = 'p-6 bg-blue-50 border-2 border-blue-600';
+            nextSteps.innerHTML = `
+                <h3 class="font-bold mb-3">Next Steps</h3>
+                <div class="space-y-2 text-sm">
+                    ${allSuccess ? `
+                        <div>✅ <a href="/ideas/admin.html" class="underline font-bold">Go to Admin Panel</a> to create your first post</div>
+                        <div>✅ <a href="/ideas/" class="underline font-bold">View Blog</a> to see your posts</div>
+                        <div>✅ <a href="/ideas/setup.html" class="underline font-bold">Setup Checklist</a> for remaining tasks</div>
+                    ` : `
+                        <div>1. Check your credentials in <code class="bg-white px-2 py-1">js/supabase-config.js</code></div>
+                        <div>2. Verify you ran all SQL queries from <code class="bg-white px-2 py-1">SUPABASE_SETUP.md</code></div>
+                        <div>3. Check the browser console for detailed errors</div>
+                        <div>4. Verify your Supabase project is active</div>
+                    `}
+                </div>
+            `;
+            resultsDiv.appendChild(nextSteps);
+        }
+
+        // Run tests
+        testConnection();
+    </script>
+</body>
+</html>

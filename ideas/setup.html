@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Setup - Flight Labs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-stone-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-black mb-8">Blog Setup Checklist</h1>
+        
+        <div class="bg-white border-3 border-black p-6 mb-6 shadow-lg">
+            <h2 class="text-2xl font-bold mb-4">Setup Steps</h2>
+            
+            <div class="space-y-4">
+                <label class="flex items-start gap-3 p-3 hover:bg-stone-50 cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5">
+                    <div>
+                        <div class="font-bold">1. Create Supabase Project</div>
+                        <div class="text-sm text-stone-600">Go to supabase.com and create a new project</div>
+                    </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 hover:bg-stone-50 cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5">
+                    <div>
+                        <div class="font-bold">2. Run SQL Queries</div>
+                        <div class="text-sm text-stone-600">Copy SQL from SUPABASE_SETUP.md and run in SQL Editor</div>
+                    </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 hover:bg-stone-50 cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5">
+                    <div>
+                        <div class="font-bold">3. Update Configuration</div>
+                        <div class="text-sm text-stone-600">Edit js/supabase-config.js with your credentials</div>
+                    </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 hover:bg-stone-50 cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5">
+                    <div>
+                        <div class="font-bold">4. Test Admin Panel</div>
+                        <div class="text-sm text-stone-600">Open admin.html and create a test post</div>
+                    </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 hover:bg-stone-50 cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5">
+                    <div>
+                        <div class="font-bold">5. Generate Post Page</div>
+                        <div class="text-sm text-stone-600">Run: node generate-post.js test-post</div>
+                    </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 hover:bg-stone-50 cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5">
+                    <div>
+                        <div class="font-bold">6. Test Blog Listing</div>
+                        <div class="text-sm text-stone-600">Open index.html and verify posts load</div>
+                    </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 hover:bg-stone-50 cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5">
+                    <div>
+                        <div class="font-bold">7. Test Email Capture</div>
+                        <div class="text-sm text-stone-600">Submit email on homepage footer</div>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="bg-yellow-100 border-3 border-black p-6 mb-6">
+            <h3 class="font-bold text-lg mb-2">⚠️ Important</h3>
+            <p class="text-sm">Make sure to update your Supabase credentials in <code class="bg-white px-2 py-1 border border-black">js/supabase-config.js</code> before testing!</p>
+        </div>
+
+        <div class="flex gap-4">
+            <a href="admin.html" class="px-6 py-3 bg-black text-white border-3 border-black font-bold hover:bg-stone-800">
+                Go to Admin Panel
+            </a>
+            <a href="index.html" class="px-6 py-3 bg-white border-3 border-black font-bold hover:bg-stone-50">
+                View Blog
+            </a>
+            <a href="../SUPABASE_SETUP.md" class="px-6 py-3 bg-white border-3 border-black font-bold hover:bg-stone-50">
+                Setup Guide
+            </a>
+        </div>
+    </div>
+</body>
+</html>
