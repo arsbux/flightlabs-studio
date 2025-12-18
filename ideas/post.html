@@ -7,6 +7,20 @@
     <title id="page-title">Loading... — Flight Labs Studio</title>
     <meta name="description" id="page-description" content="Flight Labs Studio blog post">
 
+    <!-- Open Graph / Social Share - Updated dynamically -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" id="og-url" content="">
+    <meta property="og:title" id="og-title" content="Flight Labs Studio">
+    <meta property="og:description" id="og-description" content="">
+    <meta property="og:image" id="og-image" content="https://flightlabs.studio/socialshare.png">
+    <meta property="og:site_name" content="Flight Labs Studio">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twitter-title" content="Flight Labs Studio">
+    <meta name="twitter:description" id="twitter-description" content="">
+    <meta name="twitter:image" id="twitter-image" content="https://flightlabs.studio/socialshare.png">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -231,8 +245,28 @@
 
                 if (error) throw error;
 
+                // Strip HTML tags for plain text description
+                const plainContent = post.content.replace(/<[^>]*>/g, '').substring(0, 160);
+                const description = post.excerpt || plainContent;
+                const postUrl = `https://flightlabs.studio/ideas/${post.slug}.html`;
+                const shareImage = post.featured_image || 'https://flightlabs.studio/socialshare.png';
+
+                // Update page meta
                 document.getElementById('page-title').textContent = `${post.title} — Flight Labs Studio`;
-                document.getElementById('page-description').content = post.excerpt || post.content.substring(0, 160);
+                document.getElementById('page-description').content = description;
+
+                // Update Open Graph meta tags
+                document.getElementById('og-url').content = postUrl;
+                document.getElementById('og-title').content = post.title;
+                document.getElementById('og-description').content = description;
+                document.getElementById('og-image').content = shareImage;
+
+                // Update Twitter meta tags
+                document.getElementById('twitter-title').content = post.title;
+                document.getElementById('twitter-description').content = description;
+                document.getElementById('twitter-image').content = shareImage;
+
+                // Update visible content
                 document.getElementById('post-title').textContent = post.title;
                 document.getElementById('post-date').textContent = formatDate(post.created_at);
                 document.getElementById('post-reading-time').textContent = getReadingTime(post.content);
