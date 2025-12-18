@@ -150,23 +150,23 @@
 
     <!-- Post Content -->
     <article id="post-content" class="hidden">
-        <!-- Featured Image -->
-        <div id="featured-image-container" class="hidden">
-            <div class="w-full h-[50vh] bg-stone-200 border-b-3 border-black overflow-hidden">
-                <img id="featured-image" src="" alt="" class="w-full h-full object-cover">
-            </div>
-        </div>
-
-        <!-- Post Header -->
-        <header class="max-w-3xl mx-auto px-4 pt-32 pb-8 sm:pt-40 sm:pb-12">
-            <div class="flex items-center gap-3 text-sm text-stone-500 mb-6">
+        <!-- Post Header - Title & Excerpt First -->
+        <header class="max-w-3xl mx-auto px-4 pt-32 pb-8 sm:pt-40 sm:pb-12 text-center">
+            <div class="flex items-center justify-center gap-3 text-sm text-stone-500 mb-6">
                 <span id="post-date"></span>
                 <span>•</span>
                 <span id="post-reading-time"></span>
             </div>
-            <h1 id="post-title" class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight"></h1>
-            <p id="post-excerpt" class="text-xl text-stone-600 font-hand"></p>
+            <h1 id="post-title" class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 leading-tight"></h1>
+            <p id="post-excerpt" class="text-lg sm:text-xl text-stone-600 max-w-2xl mx-auto"></p>
         </header>
+
+        <!-- Featured Image - Below Title & Excerpt -->
+        <div id="featured-image-container" class="hidden mb-12">
+            <div class="w-full aspect-[21/9] bg-stone-200 overflow-hidden">
+                <img id="featured-image" src="" alt="" class="w-full h-full object-cover">
+            </div>
+        </div>
 
         <!-- Post Body -->
         <div class="max-w-3xl mx-auto px-4 pb-16">
