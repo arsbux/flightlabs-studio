@@ -195,14 +195,12 @@
     </div>
 
     <script>
-        // Supabase Configuration v3.0 - Always initialize fresh
+        // Supabase Configuration
         const SUPABASE_URL = 'https://nckdgmtgdwhraspjynwd.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja2RnbXRnZHdocmFzcGp5bndkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODgyOTEsImV4cCI6MjA4MTE2NDI5MX0._JQQ6JurL-fDuJiYw2oqTmw_IQfLzmlJbklYfddVYY8';
         
-        // Initialize Supabase client - always create fresh to avoid cache issues
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
-        // Helper functions
         function formatDate(dateString) {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return new Date(dateString).toLocaleDateString('en-US', options);
@@ -217,12 +215,11 @@
 
         lucide.createIcons();
 
-        // Get slug from URL path or query params
+        // Get slug from query params (Vercel rewrite) or URL path
         const urlParams = new URLSearchParams(window.location.search);
         const urlPath = window.location.pathname;
         const slug = urlParams.get('slug') || urlPath.split('/').pop().replace('.html', '');
 
-        // Load post
         async function loadPost() {
             try {
                 const { data: post, error } = await supabaseClient
@@ -234,11 +231,8 @@
 
                 if (error) throw error;
 
-                // Update page title and meta
                 document.getElementById('page-title').textContent = `${post.title} — Flight Labs Studio`;
                 document.getElementById('page-description').content = post.excerpt || post.content.substring(0, 160);
-
-                // Update post content
                 document.getElementById('post-title').textContent = post.title;
                 document.getElementById('post-date').textContent = formatDate(post.created_at);
                 document.getElementById('post-reading-time').textContent = getReadingTime(post.content);
@@ -254,10 +248,8 @@
                     document.getElementById('featured-image-container').classList.remove('hidden');
                 }
 
-                // Show content, hide loading
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('post-content').classList.remove('hidden');
-
                 lucide.createIcons();
             } catch (error) {
                 console.error('Error loading post:', error);
