@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/ideas/admin",
+      "destination": "/ideas/admin.html"
+    },
+    {
       "source": "/ideas/:slug.html",
       "destination": "/ideas/post.html?slug=:slug"
     }
