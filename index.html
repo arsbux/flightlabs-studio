@@ -56,10 +56,91 @@
     <style>
         ::selection { background: #FF4F00; color: #050505; }
         html { scroll-behavior: smooth; }
+        
+        /* Custom Crosshair Cursor */
+        .crosshair-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+        .crosshair-cursor::before,
+        .crosshair-cursor::after {
+            content: '';
+            position: absolute;
+            background: #FF4F00;
+        }
+        .crosshair-cursor::before {
+            width: 1px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .crosshair-cursor::after {
+            width: 20px;
+            height: 1px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* Ticker Animation */
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-scroll {
+            animation: ticker 20s linear infinite;
+        }
+        
+        /* Glitch effect on hover */
+        .glitch-hover:hover {
+            animation: glitch 0.3s ease;
+        }
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+        
+        /* Terminal blink */
+        .terminal-blink::after {
+            content: '_';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* Scan line effect */
+        .scan-lines::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 2px,
+                rgba(0, 0, 0, 0.1) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
     </style>
 </head>
 
-<body class="bg-dark text-light font-sans antialiased">
+<body class="bg-dark text-light font-sans antialiased cursor-none">
+
+    <!-- Custom Cursor -->
+    <div class="crosshair-cursor hidden md:block" id="cursor"></div>
 
     <!-- Nav -->
     <nav class="fixed top-0 left-0 w-full z-50 border-b border-light/10 bg-dark/90 backdrop-blur-md">
@@ -72,7 +153,7 @@
                 <a href="#hangar" class="hover:text-accent transition-colors">02. THE HANGAR</a>
                 <a href="#protocol" class="hover:text-accent transition-colors">03. THE PROTOCOL</a>
             </div>
-            <a href="#liftoff" class="font-mono text-xs bg-accent text-dark px-4 py-2 hover:bg-light transition-colors">
+            <a href="/pricing.html" class="font-mono text-xs bg-accent text-dark px-4 py-2 hover:bg-light transition-colors">
                 [ INITIATE ]
             </a>
         </div>
@@ -105,6 +186,33 @@
             </div>
         </div>
     </section>
+
+    <!-- Ticker -->
+    <div class="border-y border-light/10 py-4 overflow-hidden bg-dark">
+        <div class="ticker-scroll whitespace-nowrap flex">
+            <span class="font-mono text-xs text-light/40 mx-8">// SHIP LOUD</span>
+            <span class="font-mono text-xs text-accent mx-8">◆</span>
+            <span class="font-mono text-xs text-light/40 mx-8">// DEPLOY CLEAN</span>
+            <span class="font-mono text-xs text-accent mx-8">◆</span>
+            <span class="font-mono text-xs text-light/40 mx-8">// ZERO TO ONE IN 14 DAYS</span>
+            <span class="font-mono text-xs text-accent mx-8">◆</span>
+            <span class="font-mono text-xs text-light/40 mx-8">// ARCHITECTURE OVER AGONY</span>
+            <span class="font-mono text-xs text-accent mx-8">◆</span>
+            <span class="font-mono text-xs text-light/40 mx-8">// FLIGHT LABS</span>
+            <span class="font-mono text-xs text-accent mx-8">◆</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="font-mono text-xs text-light/40 mx-8">// SHIP LOUD</span>
+            <span class="font-mono text-xs text-accent mx-8">◆</span>
+            <span class="font-mono text-xs text-light/40 mx-8">// DEPLOY CLEAN</span>
+            <span class="font-mono text-xs text-accent mx-8">◆</span>
+            <span class="font-mono text-xs text-light/40 mx-8">// ZERO TO ONE IN 14 DAYS</span>
+            <span class="font-mono text-xs text-accent mx-8">◆</span>
+            <span class="font-mono text-xs text-light/40 mx-8">// ARCHITECTURE OVER AGONY</span>
+            <span class="font-mono text-xs text-accent mx-8">◆</span>
+            <span class="font-mono text-xs text-light/40 mx-8">// FLIGHT LABS</span>
+            <span class="font-mono text-xs text-accent mx-8">◆</span>
+        </div>
+    </div>
 
     <!-- Philosophy / Manifesto -->
     <section class="py-24 md:py-32 px-6 border-t border-light/10">
@@ -169,28 +277,88 @@
                 </p>
             </div>
 
-            <div class="border border-light/20 p-8 md:p-12 max-w-3xl">
-                <div class="space-y-6 mb-10">
-                    <div class="flex items-start gap-4">
-                        <span class="font-mono text-xs text-accent whitespace-nowrap">[SPEC 01]</span>
-                        <p class="text-light/80">Architecture: Scalable Next.js/Supabase Stack.</p>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <span class="font-mono text-xs text-accent whitespace-nowrap">[SPEC 02]</span>
-                        <p class="text-light/80">Design: High-end, "Supreme" Aesthetic.</p>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <span class="font-mono text-xs text-accent whitespace-nowrap">[SPEC 03]</span>
-                        <p class="text-light/80">Delivery: 14 Business Days.</p>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <span class="font-mono text-xs text-accent whitespace-nowrap">[SPEC 04]</span>
-                        <p class="text-light font-semibold text-xl">Price: $5,000 USD (Fixed).</p>
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <!-- Specs Card -->
+                <div class="border border-light/20 p-8 md:p-12">
+                    <h3 class="font-mono text-xs text-accent mb-8">[THE SPECS]</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <span class="font-mono text-xs text-light/40 whitespace-nowrap">[01]</span>
+                            <div>
+                                <span class="font-mono text-xs text-accent">ARCHITECTURE</span>
+                                <p class="text-light/80 mt-1">Scalable Next.js/Supabase Stack.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="font-mono text-xs text-light/40 whitespace-nowrap">[02]</span>
+                            <div>
+                                <span class="font-mono text-xs text-accent">VELOCITY</span>
+                                <p class="text-light/80 mt-1">14 Business Days.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="font-mono text-xs text-light/40 whitespace-nowrap">[03]</span>
+                            <div>
+                                <span class="font-mono text-xs text-accent">COST</span>
+                                <p class="text-light font-semibold text-xl mt-1">$5,000 USD (Fixed).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="font-mono text-xs text-light/40 whitespace-nowrap">[04]</span>
+                            <div>
+                                <span class="font-mono text-xs text-accent">OWNERSHIP</span>
+                                <p class="text-light/80 mt-1">100% Yours. We hand over the keys.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <a href="#liftoff" class="inline-block font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors">
-                    [ VIEW THE FULL PROTOCOL ]
-                </a>
+
+                <!-- Timeline Card -->
+                <div class="border border-light/20 p-8 md:p-12">
+                    <h3 class="font-mono text-xs text-accent mb-8">[THE TIMELINE]</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <span class="font-mono text-xs text-accent whitespace-nowrap">DAY 01</span>
+                            <div>
+                                <span class="font-mono text-xs text-light/40">[ BLUEPRINT ]</span>
+                                <p class="text-light/80 mt-1">Architecture & Vibe Lock.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="font-mono text-xs text-accent whitespace-nowrap">DAY 03</span>
+                            <div>
+                                <span class="font-mono text-xs text-light/40">[ VISUALS ]</span>
+                                <p class="text-light/80 mt-1">UI/UX Drop.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="font-mono text-xs text-accent whitespace-nowrap">DAY 07</span>
+                            <div>
+                                <span class="font-mono text-xs text-light/40">[ ENGINE ]</span>
+                                <p class="text-light/80 mt-1">Core Functionality Alpha.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="font-mono text-xs text-accent whitespace-nowrap">DAY 14</span>
+                            <div>
+                                <span class="font-mono text-xs text-light/40">[ LIFTOFF ]</span>
+                                <p class="text-light/80 mt-1">Production Deploy & Handoff.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Requirements -->
+            <div class="border border-accent/50 p-8 md:p-12 max-w-3xl">
+                <h3 class="font-mono text-xs text-accent mb-4">[MISSION REQUIREMENTS]</h3>
+                <h4 class="text-2xl md:text-3xl font-black mb-4">WE DO NOT WORK WITH EVERYONE.</h4>
+                <p class="text-light/70 mb-4">
+                    This protocol is strictly for founders who have a validated idea, a cleared budget, and trust the architect.
+                </p>
+                <p class="text-light/50 text-sm">
+                    If you need a committee to approve a colour change, go elsewhere. We build for the bold.
+                </p>
             </div>
         </div>
     </section>
@@ -200,39 +368,72 @@
         <div class="max-w-7xl mx-auto">
             <div class="mb-16">
                 <span class="font-mono text-xs text-accent tracking-tight mb-6 block">[04 // THE HANGAR]</span>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight">
-                    RECENT DEPLOYMENTS.
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight mb-4">
+                    FLIGHT LOGS.
                 </h2>
+                <p class="text-light/70 text-lg max-w-2xl">
+                    A collection of commercial client work and internal laboratory experiments.
+                </p>
             </div>
 
             <div class="space-y-4">
                 <!-- Project 1 -->
-                <div class="border border-light/10 p-6 md:p-8 hover:border-light/30 transition-colors group">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="group border border-light/10 p-6 md:p-8 hover:border-accent/50 transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-dark/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center font-mono text-xs text-accent/50 overflow-hidden">
+                        <pre class="text-[10px] leading-tight">
+$ git log --oneline -5
+a3f2d1c feat: sentiment analysis engine
+b4e5f6a fix: rate limiting optimization  
+c7d8e9b refactor: api architecture
+d0e1f2c feat: reddit api integration
+e3f4a5b init: project scaffold
+                        </pre>
+                    </div>
+                    <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
                             <span class="font-mono text-xs text-accent">[PROJECT: REDDIT SIGNALS]</span>
                             <span class="font-mono text-xs text-light/40">// AI SENTIMENT ENGINE</span>
-                            <span class="font-mono text-xs text-light/40">// BUILT IN 72 HOURS</span>
+                            <span class="font-mono text-xs text-light/40">// INTERNAL R&D</span>
                         </div>
                         <span class="font-mono text-xs text-green-500">STATUS: OPERATIONAL</span>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="border border-light/10 p-6 md:p-8 hover:border-light/30 transition-colors group">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="group border border-light/10 p-6 md:p-8 hover:border-accent/50 transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-dark/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center font-mono text-xs text-accent/50 overflow-hidden">
+                        <pre class="text-[10px] leading-tight">
+$ npm run deploy
+✓ Build completed in 4.2s
+✓ 500+ waitlist signups
+✓ Deployed to production
+✓ SSL certificates active
+✓ CDN propagation complete
+                        </pre>
+                    </div>
+                    <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
                             <span class="font-mono text-xs text-accent">[PROJECT: VIBE CODER]</span>
                             <span class="font-mono text-xs text-light/40">// DEV-TOOL</span>
-                            <span class="font-mono text-xs text-light/40">// 500+ WAITLIST</span>
+                            <span class="font-mono text-xs text-light/40">// 500+ WAITLIST IN 24H</span>
                         </div>
                         <span class="font-mono text-xs text-yellow-500">STATUS: SCALING</span>
                     </div>
                 </div>
 
                 <!-- Project 3 -->
-                <div class="border border-light/10 p-6 md:p-8 hover:border-light/30 transition-colors group">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="group border border-light/10 p-6 md:p-8 hover:border-accent/50 transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-dark/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center font-mono text-xs text-accent/50 overflow-hidden">
+                        <pre class="text-[10px] leading-tight">
+$ trackify status
+Active sites: 12
+Events today: 24,847
+Avg response: 12ms
+Privacy: GDPR compliant
+Uptime: 99.97%
+                        </pre>
+                    </div>
+                    <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
                             <span class="font-mono text-xs text-accent">[PROJECT: TRACKIFY]</span>
                             <span class="font-mono text-xs text-light/40">// PRIVACY-FIRST ANALYTICS</span>
@@ -245,8 +446,28 @@
 
             <div class="mt-10">
                 <a href="/ideas/" class="font-mono text-sm text-light/60 hover:text-accent transition-colors">
-                    [ EXPLORE ALL FLIGHT LOGS → ]
+                    [ EXPLORE ALL TRANSMISSIONS → ]
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Stats -->
+    <section class="py-12 px-6 border-t border-light/10 bg-dark">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="border border-light/10 p-6 text-center">
+                    <span class="font-mono text-xs text-light/40 block mb-2">[RECENT COMMITS]</span>
+                    <span class="font-mono text-3xl md:text-4xl text-accent font-bold" id="commit-count">1,402</span>
+                </div>
+                <div class="border border-light/10 p-6 text-center">
+                    <span class="font-mono text-xs text-light/40 block mb-2">[AVG DEPLOY TIME]</span>
+                    <span class="font-mono text-3xl md:text-4xl text-light font-bold">11 <span class="text-lg">DAYS</span></span>
+                </div>
+                <div class="border border-light/10 p-6 text-center">
+                    <span class="font-mono text-xs text-light/40 block mb-2">[PROJECTS IN FLIGHT]</span>
+                    <span class="font-mono text-3xl md:text-4xl text-green-500 font-bold">3</span>
+                </div>
             </div>
         </div>
     </section>
@@ -256,9 +477,10 @@
         <div class="max-w-7xl mx-auto">
             <div class="max-w-3xl">
                 <span class="font-mono text-xs text-accent tracking-tight mb-6 block">[05 // LIFTOFF]</span>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight mb-8">
-                    READY FOR TAKEOFF?
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight mb-4">
+                    SECURE YOUR SLOT.
                 </h2>
+                <p class="font-mono text-sm text-accent mb-8">Only 2 flight slots available this month.</p>
                 <div class="space-y-6 text-light/70 text-lg leading-relaxed mb-10">
                     <p>
                         We do not work with everyone. We work with visionaries who have a cleared budget and a bias for action.
@@ -268,12 +490,52 @@
                     </p>
                 </div>
                 <div class="space-y-4">
-                    <a href="https://cal.com/flightlabs/audit" target="_blank" class="inline-block font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors">
+                    <a href="/pricing.html" class="inline-block font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors">
                         [ BOOK THE AUDIT — $250 ]
                     </a>
                     <p class="font-mono text-xs text-light/40">
                         Paid call fee is credited toward your first build.
                     </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Radar CTA -->
+    <section class="py-24 md:py-32 px-6 border-t border-light/10 bg-dark">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="font-mono text-xs text-accent tracking-tight mb-6 block">[06 // THE RADAR]</span>
+                    <h2 class="text-4xl md:text-5xl font-black leading-[0.95] tracking-tight mb-4">
+                        TRANSMISSIONS.
+                    </h2>
+                    <p class="text-light/70 text-lg mb-8">
+                        Decoding the future of tech, velocity, and independent building. Weekly case studies, product teardowns, and stunt releases.
+                    </p>
+                    <a href="/ideas/" class="inline-block font-mono text-sm border border-light/30 px-8 py-4 hover:border-accent hover:text-accent transition-colors">
+                        [ ACCESS THE RADAR ]
+                    </a>
+                </div>
+                <div class="border border-light/20 p-8">
+                    <h3 class="font-mono text-xs text-accent mb-4">[JOIN THE BRIEFING]</h3>
+                    <p class="text-light/70 mb-6">No fluff. Just signal.</p>
+                    <form id="email-form" class="space-y-4">
+                        <input 
+                            type="email" 
+                            id="email-input"
+                            placeholder="your@email.com" 
+                            required
+                            class="w-full bg-transparent border border-light/20 px-4 py-3 font-mono text-sm text-light placeholder:text-light/30 focus:border-accent focus:outline-none transition-colors"
+                        >
+                        <button 
+                            type="submit"
+                            class="w-full font-mono text-sm bg-accent text-dark px-8 py-3 hover:bg-light transition-colors"
+                        >
+                            [ SUBSCRIBE ]
+                        </button>
+                        <p id="form-message" class="font-mono text-xs text-center hidden"></p>
+                    </form>
                 </div>
             </div>
         </div>
@@ -303,6 +565,102 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+        });
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+        });
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '1';
+        });
+
+        // Click sound effect (subtle)
+        const clickSound = () => {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'square';
+            gainNode.gain.value = 0.02;
+            
+            oscillator.start();
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.05);
+            oscillator.stop(audioContext.currentTime + 0.05);
+        };
+
+        // Add click sound to links and buttons
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('click', clickSound);
+        });
+
+        // Animate commit count
+        const commitCount = document.getElementById('commit-count');
+        let count = 1402;
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                count += Math.floor(Math.random() * 3) + 1;
+                commitCount.textContent = count.toLocaleString();
+            }
+        }, 5000);
+    </script>
+
+    <!-- Supabase Email Subscription -->
+    <script>
+        const SUPABASE_URL = 'https://nckdgmtgdwhraspjynwd.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja2RnbXRnZHdocmFzcGp5bndkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODgyOTEsImV4cCI6MjA4MTE2NDI5MX0._JQQ6JurL-fDuJiYw2oqTmw_IQfLzmlJbklYfddVYY8';
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        document.getElementById('email-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email-input').value;
+            const messageEl = document.getElementById('form-message');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = '[ TRANSMITTING... ]';
+            
+            try {
+                const { data, error } = await supabase
+                    .from('email_subscribers')
+                    .insert([{ email: email, source: 'homepage' }]);
+                
+                if (error) {
+                    if (error.code === '23505') {
+                        messageEl.textContent = 'Already on the radar.';
+                        messageEl.className = 'font-mono text-xs text-center text-accent';
+                    } else {
+                        throw error;
+                    }
+                } else {
+                    messageEl.textContent = 'Signal received. Welcome aboard.';
+                    messageEl.className = 'font-mono text-xs text-center text-green-500';
+                    document.getElementById('email-input').value = '';
+                }
+            } catch (err) {
+                messageEl.textContent = 'Transmission failed. Try again.';
+                messageEl.className = 'font-mono text-xs text-center text-red-500';
+            }
+            
+            messageEl.classList.remove('hidden');
+            submitBtn.disabled = false;
+            submitBtn.textContent = '[ SUBSCRIBE ]';
+        });
+    </script>
 
 </body>
 </html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Flight Launch — $5,000 MVP in 14 Days | Flight Labs</title>
+    
+    <meta name="description" content="Zero to production-ready MVP in 14 days. Fixed price. No equity. No bloat. Just code.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://flightlabs.studio/pricing">
+    <meta property="og:title" content="The Flight Launch — $5,000 MVP in 14 Days">
+    <meta property="og:description" content="Zero to production-ready MVP in 14 days. Fixed price. No equity. No bloat. Just code.">
+    <meta property="og:image" content="https://flightlabs.studio/socialshare.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter Tight"', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#050505',
+                        light: '#EDEDED',
+                        accent: '#FF4F00',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::selection { background: #FF4F00; color: #050505; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+
+<body class="bg-dark text-light font-sans antialiased min-h-screen">
+
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 w-full z-50 border-b border-light/10 bg-dark/90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="font-mono text-sm tracking-tight hover:text-accent transition-colors">
+                [ FLIGHT LABS ]
+            </a>
+            <div class="hidden md:flex items-center gap-8 font-mono text-xs tracking-tight">
+                <a href="/ideas/" class="hover:text-accent transition-colors">01. THE RADAR</a>
+                <a href="/#hangar" class="hover:text-accent transition-colors">02. THE HANGAR</a>
+                <a href="#specs" class="hover:text-accent transition-colors">03. THE PROTOCOL</a>
+            </div>
+            <a href="#book" class="font-mono text-xs bg-accent text-dark px-4 py-2 hover:bg-light transition-colors">
+                [ INITIATE ]
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            <span class="font-mono text-xs text-accent tracking-tight mb-6 block">[PROTOCOL: FLIGHT LAUNCH]</span>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.95] tracking-tight mb-6">
+                THE FLIGHT LAUNCH.
+            </h1>
+            <p class="text-light/70 text-xl md:text-2xl max-w-2xl mb-4">
+                From raw insight to production-ready MVP in 14 days.
+            </p>
+            <p class="text-light/50 text-lg max-w-2xl">
+                No equity. No bloat. No endless "discovery phases." Just code that ships.
+            </p>
+        </div>
+    </section>
+
+    <!-- Price Hero -->
+    <section class="py-12 px-6 border-y border-light/10">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                <div>
+                    <span class="font-mono text-xs text-light/40 block mb-2">[FIXED INVESTMENT]</span>
+                    <div class="flex items-baseline gap-3">
+                        <span class="text-6xl md:text-7xl font-black">$5,000</span>
+                        <span class="text-light/50 text-xl">USD</span>
+                    </div>
+                </div>
+                <div class="text-left md:text-right">
+                    <span class="font-mono text-xs text-accent block mb-1">14 BUSINESS DAYS</span>
+                    <span class="font-mono text-xs text-light/40">IDEA → PRODUCTION</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Included -->
+    <section id="specs" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-mono text-xs text-accent mb-12">[WHAT'S INCLUDED]</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="border border-light/20 p-8">
+                    <span class="font-mono text-xs text-light/40 block mb-4">[01]</span>
+                    <h3 class="text-xl font-bold mb-3">ARCHITECTURE</h3>
+                    <p class="text-light/60">Scalable Next.js/Supabase stack built for growth. No technical debt. No spaghetti code.</p>
+                </div>
+                <div class="border border-light/20 p-8">
+                    <span class="font-mono text-xs text-light/40 block mb-4">[02]</span>
+                    <h3 class="text-xl font-bold mb-3">DESIGN</h3>
+                    <p class="text-light/60">High-fidelity UI/UX that doesn't look like a template. Your product deserves better than Bootstrap.</p>
+                </div>
+                <div class="border border-light/20 p-8">
+                    <span class="font-mono text-xs text-light/40 block mb-4">[03]</span>
+                    <h3 class="text-xl font-bold mb-3">DEPLOYMENT</h3>
+                    <p class="text-light/60">Production-ready on Vercel with CI/CD, SSL, and monitoring. Not a localhost demo.</p>
+                </div>
+                <div class="border border-light/20 p-8">
+                    <span class="font-mono text-xs text-light/40 block mb-4">[04]</span>
+                    <h3 class="text-xl font-bold mb-3">OWNERSHIP</h3>
+                    <p class="text-light/60">100% yours. Full codebase handoff. No licensing fees. No vendor lock-in. We hand over the keys.</p>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <h2 class="font-mono text-xs text-accent mb-8">[THE TIMELINE]</h2>
+            <div class="border border-light/20 p-8 mb-16">
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div>
+                        <span class="font-mono text-2xl text-accent block mb-2">DAY 01</span>
+                        <span class="font-mono text-xs text-light/40 block mb-1">[ BLUEPRINT ]</span>
+                        <p class="text-light/70 text-sm">Architecture & vibe lock. We align on exactly what we're building.</p>
+                    </div>
+                    <div>
+                        <span class="font-mono text-2xl text-accent block mb-2">DAY 03</span>
+                        <span class="font-mono text-xs text-light/40 block mb-1">[ VISUALS ]</span>
+                        <p class="text-light/70 text-sm">UI/UX drop. You see your product take shape.</p>
+                    </div>
+                    <div>
+                        <span class="font-mono text-2xl text-accent block mb-2">DAY 07</span>
+                        <span class="font-mono text-xs text-light/40 block mb-1">[ ENGINE ]</span>
+                        <p class="text-light/70 text-sm">Core functionality alpha. The machine starts running.</p>
+                    </div>
+                    <div>
+                        <span class="font-mono text-2xl text-accent block mb-2">DAY 14</span>
+                        <span class="font-mono text-xs text-light/40 block mb-1">[ LIFTOFF ]</span>
+                        <p class="text-light/70 text-sm">Production deploy & full handoff. You're live.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Filter / Commitment Section -->
+    <section id="book" class="py-20 px-6 border-t border-light/10 bg-dark">
+        <div class="max-w-3xl mx-auto">
+            <div class="border border-accent/50 p-8 md:p-12 mb-12">
+                <h2 class="font-mono text-xs text-accent mb-4">[MISSION REQUIREMENTS]</h2>
+                <h3 class="text-3xl md:text-4xl font-black mb-6">WE DON'T TALK TO SPECULATORS.</h3>
+                <div class="space-y-4 text-light/70 mb-8">
+                    <p>
+                        We've learned the hard way: endless "discovery calls" with people who are "just exploring" waste everyone's time.
+                    </p>
+                    <p>
+                        The Flight Launch is for <span class="text-light font-semibold">decision-makers who are ready to build</span>. Founders with a validated idea, a cleared budget, and the authority to say "yes" without a committee.
+                    </p>
+                    <p>
+                        If you need six meetings to approve a color change, we're not the right fit. No hard feelings.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Commitment Fee Card -->
+            <div class="border border-light/20 p-8 md:p-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="font-mono text-xs text-accent">[INITIATE PROTOCOL]</h2>
+                    <span class="font-mono text-xs text-yellow-500">2 SLOTS THIS MONTH</span>
+                </div>
+
+                <h3 class="text-2xl md:text-3xl font-black mb-4">BOOK YOUR STRATEGY CALL</h3>
+                
+                <p class="text-light/70 mb-8">
+                    A 45-minute call to validate your idea, map the architecture, and confirm we're aligned. If we proceed, this fee is deducted from your $5,000 total.
+                </p>
+
+                <div class="bg-light/5 border border-light/10 p-6 mb-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-light/60">Commitment Fee</span>
+                        <span class="text-2xl font-bold">$250</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-light/40">5% of Flight Launch</span>
+                        <span class="text-light/40">Credited toward build</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-start gap-3">
+                        <span class="text-accent text-sm">→</span>
+                        <span class="text-light/70 text-sm">Filters out tire-kickers and "just exploring" calls</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-accent text-sm">→</span>
+                        <span class="text-light/70 text-sm">Ensures we're both serious about building</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-accent text-sm">→</span>
+                        <span class="text-light/70 text-sm">100% credited if we move forward together</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-accent text-sm">→</span>
+                        <span class="text-light/70 text-sm">You still get architecture insights even if we don't proceed</span>
+                    </div>
+                </div>
+
+                <a 
+                    href="https://checkout.dodopayments.com/buy/pdt_0NUQGJjesPwJ0vMZKnHCE?quantity=1&redirect_url=https://flightlabs.studio/success.html" 
+                    class="block w-full font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors text-center"
+                >
+                    [ PAY $250 & BOOK CALL ]
+                </a>
+
+                <p class="font-mono text-xs text-light/30 text-center mt-4">
+                    Secure payment via Dodo Payments • Credited toward your $5,000 build
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 px-6 border-t border-light/10">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="font-mono text-xs text-accent mb-12">[FREQUENTLY ASKED]</h2>
+            
+            <div class="space-y-8">
+                <div class="border-b border-light/10 pb-8">
+                    <h4 class="font-bold text-lg mb-3">Why charge for a call?</h4>
+                    <p class="text-light/60">Because free calls attract people who aren't serious. The $250 commitment ensures we're both invested in making this work. It's not a fee—it's a filter.</p>
+                </div>
+                <div class="border-b border-light/10 pb-8">
+                    <h4 class="font-bold text-lg mb-3">What if we're not a fit?</h4>
+                    <p class="text-light/60">You still walk away with a technical roadmap, architecture recommendations, and clarity on your next steps. That alone is worth more than $250.</p>
+                </div>
+                <div class="border-b border-light/10 pb-8">
+                    <h4 class="font-bold text-lg mb-3">What happens after I pay?</h4>
+                    <p class="text-light/60">You'll fill out a brief intake form, then receive a calendar link within 24 hours to book your strategy call at a time that works for you.</p>
+                </div>
+                <div class="border-b border-light/10 pb-8">
+                    <h4 class="font-bold text-lg mb-3">How soon can we start building?</h4>
+                    <p class="text-light/60">If approved, we can begin within 1-2 weeks depending on current flight schedule. We only take 2-3 projects per month to maintain quality.</p>
+                </div>
+                <div class="border-b border-light/10 pb-8">
+                    <h4 class="font-bold text-lg mb-3">What's the payment structure for the full build?</h4>
+                    <p class="text-light/60">50% upfront ($2,500 minus your $250 commitment = $2,250), 50% on delivery. Simple. No milestone games.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-6 border-t border-light/10">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-black mb-6">READY TO BUILD?</h2>
+            <p class="text-light/60 mb-8">Stop planning. Start shipping.</p>
+            <a 
+                href="https://checkout.dodopayments.com/buy/pdt_0NUQGJjesPwJ0vMZKnHCE?quantity=1&redirect_url=https://flightlabs.studio/success.html" 
+                class="inline-block font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors"
+            >
+                [ INITIATE PROTOCOL — $250 ]
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-light/10 py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+                <div>
+                    <span class="font-mono text-sm tracking-tight block mb-2">FLIGHT LABS // EST. 2025</span>
+                    <span class="font-mono text-xs text-accent">[SYSTEM: NOMINAL]</span>
+                </div>
+                <div class="flex items-center gap-6 font-mono text-xs text-light/40">
+                    <a href="https://twitter.com/flightlabs" target="_blank" class="hover:text-accent transition-colors">TWITTER</a>
+                    <a href="https://github.com/flightlabs" target="_blank" class="hover:text-accent transition-colors">GITHUB</a>
+                    <a href="https://linkedin.com/company/flightlabs" target="_blank" class="hover:text-accent transition-colors">LINKEDIN</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Confirmed — Flight Labs</title>
+    
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter Tight"', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#050505',
+                        light: '#EDEDED',
+                        accent: '#FF4F00',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        ::selection { background: #FF4F00; color: #050505; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+
+<body class="bg-dark text-light font-sans antialiased min-h-screen">
+
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 w-full z-50 border-b border-light/10 bg-dark/90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="font-mono text-sm tracking-tight hover:text-accent transition-colors">
+                [ FLIGHT LABS ]
+            </a>
+            <span class="font-mono text-xs text-green-500">[ PAYMENT CONFIRMED ]</span>
+        </div>
+    </nav>
+
+    <!-- Success Message -->
+    <section class="pt-32 pb-8 px-6">
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="w-16 h-16 border-2 border-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <span class="font-mono text-xs text-accent tracking-tight mb-4 block">[TRANSACTION: COMPLETE]</span>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-black leading-[0.95] tracking-tight mb-4">
+                YOU'RE IN.
+            </h1>
+            <p class="text-light/70 text-lg">
+                Complete the form below so we can prepare for your Flight Audit.
+            </p>
+        </div>
+    </section>
+
+    <!-- Intake Form -->
+    <section class="py-8 px-6">
+        <div class="max-w-2xl mx-auto">
+            <div class="border border-light/20 p-8 md:p-12">
+                <h2 class="font-mono text-xs text-accent mb-8">[PROJECT INTAKE FORM]</h2>
+
+                <form id="intake-form" class="space-y-6">
+                    <!-- Name -->
+                    <div>
+                        <label class="font-mono text-xs text-light/60 block mb-2">FULL NAME *</label>
+                        <input 
+                            type="text" 
+                            name="name"
+                            required
+                            class="w-full bg-transparent border border-light/20 px-4 py-3 font-mono text-sm text-light placeholder:text-light/30 focus:border-accent focus:outline-none transition-colors"
+                            placeholder="John Doe"
+                        >
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="font-mono text-xs text-light/60 block mb-2">EMAIL *</label>
+                        <input 
+                            type="email" 
+                            name="email"
+                            required
+                            class="w-full bg-transparent border border-light/20 px-4 py-3 font-mono text-sm text-light placeholder:text-light/30 focus:border-accent focus:outline-none transition-colors"
+                            placeholder="john@company.com"
+                        >
+                    </div>
+
+                    <!-- Company/Project -->
+                    <div>
+                        <label class="font-mono text-xs text-light/60 block mb-2">COMPANY / PROJECT NAME</label>
+                        <input 
+                            type="text" 
+                            name="company"
+                            class="w-full bg-transparent border border-light/20 px-4 py-3 font-mono text-sm text-light placeholder:text-light/30 focus:border-accent focus:outline-none transition-colors"
+                            placeholder="Acme Inc"
+                        >
+                    </div>
+
+                    <!-- Project Description -->
+                    <div>
+                        <label class="font-mono text-xs text-light/60 block mb-2">DESCRIBE YOUR PROJECT *</label>
+                        <textarea 
+                            name="project_description"
+                            required
+                            rows="4"
+                            class="w-full bg-transparent border border-light/20 px-4 py-3 font-mono text-sm text-light placeholder:text-light/30 focus:border-accent focus:outline-none transition-colors resize-none"
+                            placeholder="What are you building? What problem does it solve?"
+                        ></textarea>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div>
+                        <label class="font-mono text-xs text-light/60 block mb-2">IDEAL LAUNCH TIMELINE</label>
+                        <select 
+                            name="timeline"
+                            class="w-full bg-dark border border-light/20 px-4 py-3 font-mono text-sm text-light focus:border-accent focus:outline-none transition-colors"
+                        >
+                            <option value="asap">ASAP - Ready to start immediately</option>
+                            <option value="2-weeks">Within 2 weeks</option>
+                            <option value="1-month">Within 1 month</option>
+                            <option value="flexible">Flexible / Exploring</option>
+                        </select>
+                    </div>
+
+                    <!-- Budget -->
+                    <div>
+                        <label class="font-mono text-xs text-light/60 block mb-2">BUDGET RANGE</label>
+                        <select 
+                            name="budget"
+                            class="w-full bg-dark border border-light/20 px-4 py-3 font-mono text-sm text-light focus:border-accent focus:outline-none transition-colors"
+                        >
+                            <option value="5k">$5,000 (Flight Launch MVP)</option>
+                            <option value="5-10k">$5,000 - $10,000</option>
+                            <option value="10-25k">$10,000 - $25,000</option>
+                            <option value="25k+">$25,000+</option>
+                        </select>
+                    </div>
+
+                    <!-- How did you hear about us -->
+                    <div>
+                        <label class="font-mono text-xs text-light/60 block mb-2">HOW DID YOU FIND US?</label>
+                        <input 
+                            type="text" 
+                            name="referral_source"
+                            class="w-full bg-transparent border border-light/20 px-4 py-3 font-mono text-sm text-light placeholder:text-light/30 focus:border-accent focus:outline-none transition-colors"
+                            placeholder="Twitter, referral, Google, etc."
+                        >
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div>
+                        <label class="font-mono text-xs text-light/60 block mb-2">ANYTHING ELSE WE SHOULD KNOW?</label>
+                        <textarea 
+                            name="additional_notes"
+                            rows="3"
+                            class="w-full bg-transparent border border-light/20 px-4 py-3 font-mono text-sm text-light placeholder:text-light/30 focus:border-accent focus:outline-none transition-colors resize-none"
+                            placeholder="Links, context, specific requirements..."
+                        ></textarea>
+                    </div>
+
+                    <!-- Submit -->
+                    <button 
+                        type="submit"
+                        id="submit-btn"
+                        class="w-full font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors"
+                    >
+                        [ SUBMIT & AWAIT CONTACT ]
+                    </button>
+
+                    <p id="form-message" class="font-mono text-xs text-center hidden"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Happens Next -->
+    <section class="py-12 px-6">
+        <div class="max-w-2xl mx-auto">
+            <div class="border border-light/10 p-6">
+                <h3 class="font-mono text-xs text-accent mb-4">[WHAT HAPPENS NEXT]</h3>
+                <ul class="space-y-3 text-light/70 text-sm">
+                    <li class="flex items-start gap-3">
+                        <span class="text-accent">01.</span>
+                        <span>We review your submission within 24 hours</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-accent">02.</span>
+                        <span>You'll receive a calendar link to book your 45-min call</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-accent">03.</span>
+                        <span>Come prepared to discuss your vision and technical needs</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-light/10 py-12 px-6 mt-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+                <div>
+                    <span class="font-mono text-sm tracking-tight block mb-2">FLIGHT LABS // EST. 2025</span>
+                    <span class="font-mono text-xs text-accent">[SYSTEM: NOMINAL]</span>
+                </div>
+                <a href="/" class="font-mono text-xs text-light/40 hover:text-accent transition-colors">
+                    [ RETURN TO BASE ]
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Form Submission Script -->
+    <script>
+        const SUPABASE_URL = 'https://nckdgmtgdwhraspjynwd.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja2RnbXRnZHdocmFzcGp5bndkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODgyOTEsImV4cCI6MjA4MTE2NDI5MX0._JQQ6JurL-fDuJiYw2oqTmw_IQfLzmlJbklYfddVYY8';
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        document.getElementById('intake-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = document.getElementById('submit-btn');
+            const messageEl = document.getElementById('form-message');
+            
+            // Get form data
+            const formData = {
+                name: form.name.value,
+                email: form.email.value,
+                company: form.company.value || null,
+                project_description: form.project_description.value,
+                timeline: form.timeline.value,
+                budget: form.budget.value,
+                referral_source: form.referral_source.value || null,
+                additional_notes: form.additional_notes.value || null,
+                submitted_at: new Date().toISOString()
+            };
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = '[ TRANSMITTING... ]';
+            
+            try {
+                const { data, error } = await supabase
+                    .from('flight_audit_submissions')
+                    .insert([formData]);
+                
+                if (error) throw error;
+                
+                // Success state
+                messageEl.textContent = 'Transmission received. We\'ll be in touch within 24 hours.';
+                messageEl.className = 'font-mono text-xs text-center text-green-500';
+                messageEl.classList.remove('hidden');
+                
+                submitBtn.textContent = '[ SUBMITTED ✓ ]';
+                submitBtn.classList.remove('bg-accent', 'hover:bg-light');
+                submitBtn.classList.add('bg-green-500/20', 'text-green-500', 'cursor-not-allowed');
+                
+                // Disable form
+                form.querySelectorAll('input, textarea, select').forEach(el => {
+                    el.disabled = true;
+                    el.classList.add('opacity-50');
+                });
+                
+            } catch (err) {
+                console.error('Submission error:', err);
+                messageEl.textContent = 'Transmission failed. Please email us directly at hello@flightlabs.studio';
+                messageEl.className = 'font-mono text-xs text-center text-red-500';
+                messageEl.classList.remove('hidden');
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = '[ SUBMIT & AWAIT CONTACT ]';
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -80,6 +80,34 @@ CREATE INDEX idx_email_subscribers_email ON email_subscribers(email);
 ALTER TABLE email_subscribers DISABLE ROW LEVEL SECURITY;
 ```
 
+### Flight Audit Submissions Table
+
+```sql
+-- Create flight_audit_submissions table for paid audit form submissions
+CREATE TABLE flight_audit_submissions (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    company TEXT,
+    project_description TEXT NOT NULL,
+    timeline TEXT,
+    budget TEXT,
+    referral_source TEXT,
+    additional_notes TEXT,
+    submitted_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    status TEXT DEFAULT 'pending'
+);
+
+-- Create index on email
+CREATE INDEX idx_flight_audit_email ON flight_audit_submissions(email);
+
+-- Create index on status
+CREATE INDEX idx_flight_audit_status ON flight_audit_submissions(status);
+
+-- Disable Row Level Security for unrestricted access
+ALTER TABLE flight_audit_submissions DISABLE ROW LEVEL SECURITY;
+```
+
 ## 4. Optional: Set up Authentication
 
 For the admin panel, you can set up authentication:
