@@ -452,26 +452,6 @@ Uptime: 99.97%
         </div>
     </section>
 
-    <!-- Live Stats -->
-    <section class="py-12 px-6 border-t border-light/10 bg-dark">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                <div class="border border-light/10 p-6 text-center">
-                    <span class="font-mono text-xs text-light/40 block mb-2">[RECENT COMMITS]</span>
-                    <span class="font-mono text-3xl md:text-4xl text-accent font-bold" id="commit-count">1,402</span>
-                </div>
-                <div class="border border-light/10 p-6 text-center">
-                    <span class="font-mono text-xs text-light/40 block mb-2">[AVG DEPLOY TIME]</span>
-                    <span class="font-mono text-3xl md:text-4xl text-light font-bold">11 <span class="text-lg">DAYS</span></span>
-                </div>
-                <div class="border border-light/10 p-6 text-center">
-                    <span class="font-mono text-xs text-light/40 block mb-2">[PROJECTS IN FLIGHT]</span>
-                    <span class="font-mono text-3xl md:text-4xl text-green-500 font-bold">3</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Liftoff / CTA -->
     <section id="liftoff" class="py-24 md:py-32 px-6 border-t border-light/10">
         <div class="max-w-7xl mx-auto">
@@ -605,16 +585,6 @@ Uptime: 99.97%
         document.querySelectorAll('a, button').forEach(el => {
             el.addEventListener('click', clickSound);
         });
-
-        // Animate commit count
-        const commitCount = document.getElementById('commit-count');
-        let count = 1402;
-        setInterval(() => {
-            if (Math.random() > 0.7) {
-                count += Math.floor(Math.random() * 3) + 1;
-                commitCount.textContent = count.toLocaleString();
-            }
-        }, 5000);
     </script>
 
     <!-- Supabase Email Subscription -->
