@@ -9,26 +9,26 @@
     <!-- Analytics -->
     <script defer src="https://data.flightlabs.agency/trackify.js" data-site-id="flightlabs-studio-o71c2"></script>
 
-    <meta name="description" content="Flight Labs is a digital product studio building at the speed of thought. From Zero to One in 14 days.">
+    <meta name="description" content="Flight Labs is a technical studio for founders who refuse to be average. Zero to One in 14 days.">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://flightlabs.studio/">
     <meta property="og:title" content="Flight Labs — We Engineer Momentum">
-    <meta property="og:description" content="Digital product studio building at the speed of thought. From Zero to One in 14 days.">
+    <meta property="og:description" content="Technical studio for founders who refuse to be average. Zero to One in 14 days.">
     <meta property="og:image" content="https://flightlabs.studio/socialshare.png">
     <meta property="og:site_name" content="Flight Labs">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Flight Labs — We Engineer Momentum">
-    <meta name="twitter:description" content="Digital product studio building at the speed of thought. From Zero to One in 14 days.">
+    <meta name="twitter:description" content="Technical studio for founders who refuse to be average. Zero to One in 14 days.">
     <meta name="twitter:image" content="https://flightlabs.studio/socialshare.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -37,22 +37,13 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['"Inter Tight"', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace'],
                     },
                     colors: {
                         dark: '#050505',
                         light: '#EDEDED',
                         accent: '#FF4F00',
-                    },
-                    animation: {
-                        'marquee': 'marquee 40s linear infinite',
-                    },
-                    keyframes: {
-                        marquee: {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-50%)' },
-                        }
                     }
                 }
             }
@@ -64,424 +55,254 @@
 
     <style>
         ::selection { background: #FF4F00; color: #050505; }
-        .gradient-text { 
-            background: linear-gradient(90deg, #FF4F00, #FF8C00); 
-            -webkit-background-clip: text; 
-            background-clip: text;
-            -webkit-text-fill-color: transparent; 
-        }
-        .border-glow {
-            box-shadow: 0 0 0 1px rgba(255, 79, 0, 0.3);
-        }
-        .border-glow:hover {
-            box-shadow: 0 0 20px rgba(255, 79, 0, 0.2), 0 0 0 1px rgba(255, 79, 0, 0.5);
-        }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 
 <body class="bg-dark text-light font-sans antialiased">
 
     <!-- Nav -->
-    <nav class="fixed top-0 left-0 w-full z-50 border-b border-light/10 bg-dark/80 backdrop-blur-md">
+    <nav class="fixed top-0 left-0 w-full z-50 border-b border-light/10 bg-dark/90 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="/" class="font-mono text-sm tracking-wider hover:text-accent transition-colors">
+            <a href="/" class="font-mono text-sm tracking-tight hover:text-accent transition-colors">
                 [ FLIGHT LABS ]
             </a>
-            <div class="hidden md:flex items-center gap-8 font-mono text-xs tracking-wider">
-                <a href="#hangar" class="hover:text-accent transition-colors">THE HANGAR</a>
-                <a href="#protocol" class="hover:text-accent transition-colors">THE PROTOCOL</a>
-                <a href="/ideas/" class="hover:text-accent transition-colors">THE RADAR</a>
+            <div class="hidden md:flex items-center gap-8 font-mono text-xs tracking-tight">
+                <a href="/ideas/" class="hover:text-accent transition-colors">01. THE RADAR</a>
+                <a href="#hangar" class="hover:text-accent transition-colors">02. THE HANGAR</a>
+                <a href="#protocol" class="hover:text-accent transition-colors">03. THE PROTOCOL</a>
             </div>
-            <a href="#protocol" class="font-mono text-xs bg-accent text-dark px-4 py-2 hover:bg-light transition-colors">
-                [ INITIATE PROTOCOL ]
+            <a href="#liftoff" class="font-mono text-xs bg-accent text-dark px-4 py-2 hover:bg-light transition-colors">
+                [ INITIATE ]
             </a>
         </div>
     </nav>
 
     <!-- Hero -->
-    <section class="min-h-screen flex flex-col justify-center pt-20 pb-12 px-6">
+    <section class="min-h-screen flex flex-col justify-center pt-20 pb-16 px-6">
         <div class="max-w-7xl mx-auto w-full">
-            <div class="mb-8">
-                <span class="font-mono text-xs text-accent tracking-widest">DIGITAL PRODUCT STUDIO // EST. 2024</span>
+            <div class="mb-6">
+                <span class="font-mono text-xs text-accent tracking-tight">[SYSTEM STATUS: ACTIVE // VELOCITY: TERMINAL]</span>
             </div>
-            <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black leading-[0.9] tracking-tight mb-8">
-                WE<br>
-                <span class="gradient-text">ENGINEER</span><br>
-                MOMENTUM
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.95] tracking-tight mb-8">
+                WE ENGINEER<br>MOMENTUM.
             </h1>
-            <div class="max-w-xl">
-                <p class="text-light/60 text-lg md:text-xl leading-relaxed mb-8">
-                    From zero to one in 14 days. We build MVPs that move markets, not just metrics.
+            <div class="max-w-2xl">
+                <p class="text-light/70 text-lg md:text-xl leading-relaxed mb-4">
+                    The modern world doesn't reward effort. It rewards speed.
+                </p>
+                <p class="text-light/70 text-lg md:text-xl leading-relaxed mb-10">
+                    Flight Labs is a technical studio for founders who refuse to be average.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#protocol" class="font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors text-center">
-                        [ START A PROJECT ]
+                    <a href="#liftoff" class="font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors text-center">
+                        [ START THE ENGINE ]
                     </a>
                     <a href="#hangar" class="font-mono text-sm border border-light/30 px-8 py-4 hover:border-accent hover:text-accent transition-colors text-center">
-                        [ VIEW THE HANGAR ]
+                        [ VIEW RECENT FLIGHTS ]
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Ticker -->
-    <div class="border-y border-light/10 py-4 overflow-hidden">
-        <div class="flex animate-marquee whitespace-nowrap">
-            <span class="font-mono text-sm tracking-widest text-light/40 mx-8">ZERO TO ONE IN 14 DAYS</span>
-            <span class="text-accent">◆</span>
-            <span class="font-mono text-sm tracking-widest text-light/40 mx-8">$5K MVP PROTOCOL</span>
-            <span class="text-accent">◆</span>
-            <span class="font-mono text-sm tracking-widest text-light/40 mx-8">PRODUCT ENGINEERING</span>
-            <span class="text-accent">◆</span>
-            <span class="font-mono text-sm tracking-widest text-light/40 mx-8">RAPID PROTOTYPING</span>
-            <span class="text-accent">◆</span>
-            <span class="font-mono text-sm tracking-widest text-light/40 mx-8">TECHNICAL STRATEGY</span>
-            <span class="text-accent">◆</span>
-            <span class="font-mono text-sm tracking-widest text-light/40 mx-8">ZERO TO ONE IN 14 DAYS</span>
-            <span class="text-accent">◆</span>
-            <span class="font-mono text-sm tracking-widest text-light/40 mx-8">$5K MVP PROTOCOL</span>
-            <span class="text-accent">◆</span>
-            <span class="font-mono text-sm tracking-widest text-light/40 mx-8">PRODUCT ENGINEERING</span>
-            <span class="text-accent">◆</span>
-            <span class="font-mono text-sm tracking-widest text-light/40 mx-8">RAPID PROTOTYPING</span>
-            <span class="text-accent">◆</span>
-            <span class="font-mono text-sm tracking-widest text-light/40 mx-8">TECHNICAL STRATEGY</span>
-            <span class="text-accent">◆</span>
-        </div>
-    </div>
-
-    <!-- Philosophy Section -->
-    <section class="py-24 md:py-32 px-6 border-b border-light/10">
+    <!-- Philosophy / Manifesto -->
+    <section class="py-24 md:py-32 px-6 border-t border-light/10">
         <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-16 items-start">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
                 <div>
-                    <span class="font-mono text-xs text-accent tracking-widest mb-6 block">001 // MANIFESTO</span>
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
-                        THE END OF THE<br>
-                        <span class="text-accent">FEATURE FACTORY</span>
+                    <span class="font-mono text-xs text-accent tracking-tight mb-6 block">[01 // THE MANIFESTO]</span>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight">
+                        THE END OF THE FEATURE FACTORY.
                     </h2>
                 </div>
-                <div class="space-y-6 text-light/70 text-lg leading-relaxed">
+                <div class="space-y-6 text-light/70 text-lg leading-relaxed lg:pt-12">
                     <p>
-                        Most agencies build features. We engineer momentum. The difference? Features ship and die. Momentum compounds.
+                        Most agencies are designed to bill hours. We are designed to kill them.
                     </p>
                     <p>
-                        We're not here to pad your backlog or bill hours. We're here to get you from zero to one—fast, lean, and with enough velocity to escape the gravity of "good enough."
+                        We don't do "sprints" that go nowhere. We don't build bloat. We deploy high-fidelity, production-ready products at a velocity that makes the competition look like they're standing still.
                     </p>
-                    <p class="text-light font-medium">
-                        14 days. One MVP. Real users. That's the protocol.
+                    <p class="text-light font-semibold">
+                        In 2025, code is a commodity. Taste and speed are the only moats.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- The Hangar (Portfolio) -->
-    <section id="hangar" class="py-24 md:py-32 px-6 border-b border-light/10">
+    <!-- The Architect -->
+    <section class="py-24 md:py-32 px-6 border-t border-light/10">
         <div class="max-w-7xl mx-auto">
-            <div class="mb-16">
-                <span class="font-mono text-xs text-accent tracking-widest mb-4 block">002 // THE HANGAR</span>
-                <h2 class="text-4xl md:text-5xl font-black">FLIGHT LOG</h2>
-                <p class="text-light/60 mt-4 max-w-xl">Select deployments from the lab. Client work and internal experiments.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Project Card 1 -->
-                <div class="group border border-light/10 p-8 hover:border-accent/50 transition-all duration-300 border-glow">
-                    <div class="flex items-start justify-between mb-6">
-                        <span class="font-mono text-xs text-light/40">001</span>
-                        <span class="font-mono text-xs text-accent">INTERNAL</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 group-hover:text-accent transition-colors">Trackify</h3>
-                    <p class="text-light/60 mb-6">Privacy-first analytics. No cookies, no consent banners, no bullshit. Just the metrics that matter.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-xs px-3 py-1 border border-light/20 text-light/50">ANALYTICS</span>
-                        <span class="font-mono text-xs px-3 py-1 border border-light/20 text-light/50">SAAS</span>
-                    </div>
-                </div>
-
-                <!-- Project Card 2 -->
-                <div class="group border border-light/10 p-8 hover:border-accent/50 transition-all duration-300 border-glow">
-                    <div class="flex items-start justify-between mb-6">
-                        <span class="font-mono text-xs text-light/40">002</span>
-                        <span class="font-mono text-xs text-light/40">CLIENT</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 group-hover:text-accent transition-colors">MVP Sprint</h3>
-                    <p class="text-light/60 mb-6">Fintech dashboard from concept to production in 12 days. 3x faster than their previous agency.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-xs px-3 py-1 border border-light/20 text-light/50">FINTECH</span>
-                        <span class="font-mono text-xs px-3 py-1 border border-light/20 text-light/50">DASHBOARD</span>
-                    </div>
-                </div>
-
-                <!-- Project Card 3 -->
-                <div class="group border border-light/10 p-8 hover:border-accent/50 transition-all duration-300 border-glow">
-                    <div class="flex items-start justify-between mb-6">
-                        <span class="font-mono text-xs text-light/40">003</span>
-                        <span class="font-mono text-xs text-accent">INTERNAL</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 group-hover:text-accent transition-colors">Flight Labs Studio</h3>
-                    <p class="text-light/60 mb-6">This site. Built in a weekend. Supabase backend, Vercel edge, zero framework bloat.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-xs px-3 py-1 border border-light/20 text-light/50">WEB</span>
-                        <span class="font-mono text-xs px-3 py-1 border border-light/20 text-light/50">JAMSTACK</span>
-                    </div>
-                </div>
-
-                <!-- Project Card 4 -->
-                <div class="group border border-light/10 p-8 hover:border-accent/50 transition-all duration-300 border-glow">
-                    <div class="flex items-start justify-between mb-6">
-                        <span class="font-mono text-xs text-light/40">004</span>
-                        <span class="font-mono text-xs text-light/40">CLIENT</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 group-hover:text-accent transition-colors">E-Commerce Rebuild</h3>
-                    <p class="text-light/60 mb-6">Headless commerce migration. 40% faster load times, 2x conversion rate.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="font-mono text-xs px-3 py-1 border border-light/20 text-light/50">E-COMMERCE</span>
-                        <span class="font-mono text-xs px-3 py-1 border border-light/20 text-light/50">HEADLESS</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-div></h3></span></div>div>div>span>
-
-    <!-- The Protocol (Services/Pricing) -->
-    <section id="protocol" class="py-24 md:py-32 px-6 border-b border-light/10">
-        <div class="max-w-7xl mx-auto">
-            <div class="mb-16">
-                <span class="font-mono text-xs text-accent tracking-widest mb-4 block">003 // THE PROTOCOL</span>
-                <h2 class="text-4xl md:text-5xl font-black">FLIGHT CAPABILITIES</h2>
-                <p class="text-light/60 mt-4 max-w-xl">Standardized engagement models. No scope creep, no surprises.</p>
-            </div>
-
-            <div class="grid lg:grid-cols-3 gap-6">
-                <!-- Protocol 1: MVP -->
-                <div class="border border-accent p-8 relative">
-                    <div class="absolute -top-3 left-6 bg-dark px-2">
-                        <span class="font-mono text-xs text-accent">FLAGSHIP</span>
-                    </div>
-                    <div class="mb-8">
-                        <h3 class="font-mono text-sm text-light/60 mb-2">MVP PROTOCOL</h3>
-                        <div class="text-5xl font-black text-accent">$5K</div>
-                        <p class="font-mono text-xs text-light/40 mt-2">14 DAY DELIVERY</p>
-                    </div>
-                    <ul class="space-y-3 text-light/70 mb-8">
-                        <li class="flex items-start gap-3">
-                            <span class="text-accent mt-1">→</span>
-                            <span>Full-stack MVP development</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-accent mt-1">→</span>
-                            <span>Production-ready deployment</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-accent mt-1">→</span>
-                            <span>Core feature set (3-5 features)</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-accent mt-1">→</span>
-                            <span>Auth, database, hosting included</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-accent mt-1">→</span>
-                            <span>2 revision rounds</span>
-                        </li>
-                    </ul>
-                    <a href="mailto:hello@flightlabs.studio?subject=MVP Protocol Inquiry" class="block w-full font-mono text-sm bg-accent text-dark px-6 py-4 text-center hover:bg-light transition-colors">
-                        [ INITIATE PROTOCOL ]
-                    </a>
-                </div>
-
-                <!-- Protocol 2: Sprint -->
-                <div class="border border-light/20 p-8 hover:border-light/40 transition-colors">
-                    <div class="mb-8">
-                        <h3 class="font-mono text-sm text-light/60 mb-2">SPRINT PROTOCOL</h3>
-                        <div class="text-5xl font-black">$3K</div>
-                        <p class="font-mono text-xs text-light/40 mt-2">7 DAY DELIVERY</p>
-                    </div>
-                    <ul class="space-y-3 text-light/70 mb-8">
-                        <li class="flex items-start gap-3">
-                            <span class="text-light/40 mt-1">→</span>
-                            <span>Single feature or module</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-light/40 mt-1">→</span>
-                            <span>Landing page + waitlist</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-light/40 mt-1">→</span>
-                            <span>Prototype or proof of concept</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-light/40 mt-1">→</span>
-                            <span>Technical architecture review</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-light/40 mt-1">→</span>
-                            <span>1 revision round</span>
-                        </li>
-                    </ul>
-                    <a href="mailto:hello@flightlabs.studio?subject=Sprint Protocol Inquiry" class="block w-full font-mono text-sm border border-light/30 px-6 py-4 text-center hover:border-accent hover:text-accent transition-colors">
-                        [ REQUEST SPRINT ]
-                    </a>
-                </div>
-
-                <!-- Protocol 3: Retainer -->
-                <div class="border border-light/20 p-8 hover:border-light/40 transition-colors">
-                    <div class="mb-8">
-                        <h3 class="font-mono text-sm text-light/60 mb-2">RETAINER PROTOCOL</h3>
-                        <div class="text-5xl font-black">$8K</div>
-                        <p class="font-mono text-xs text-light/40 mt-2">PER MONTH</p>
-                    </div>
-                    <ul class="space-y-3 text-light/70 mb-8">
-                        <li class="flex items-start gap-3">
-                            <span class="text-light/40 mt-1">→</span>
-                            <span>40 hours/month dedicated</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-light/40 mt-1">→</span>
-                            <span>Priority async communication</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-light/40 mt-1">→</span>
-                            <span>Ongoing development & support</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-light/40 mt-1">→</span>
-                            <span>Technical strategy sessions</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-light/40 mt-1">→</span>
-                            <span>Rollover unused hours</span>
-                        </li>
-                    </ul>
-                    <a href="mailto:hello@flightlabs.studio?subject=Retainer Protocol Inquiry" class="block w-full font-mono text-sm border border-light/30 px-6 py-4 text-center hover:border-accent hover:text-accent transition-colors">
-                        [ DISCUSS RETAINER ]
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Latest from The Radar -->
-    <section class="py-24 md:py-32 px-6 border-b border-light/10">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex items-end justify-between mb-16">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
                 <div>
-                    <span class="font-mono text-xs text-accent tracking-widest mb-4 block">004 // THE RADAR</span>
-                    <h2 class="text-4xl md:text-5xl font-black">LATEST TRANSMISSIONS</h2>
+                    <span class="font-mono text-xs text-accent tracking-tight mb-6 block">[02 // THE ARCHITECT]</span>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight">
+                        BUILT BY BUILDERS.
+                    </h2>
                 </div>
-                <a href="/ideas/" class="hidden md:block font-mono text-sm text-light/60 hover:text-accent transition-colors">
-                    VIEW ALL →
+                <div class="space-y-6 text-light/70 text-lg leading-relaxed lg:pt-12">
+                    <p>
+                        I am not a freelancer. I am your Technical Partner.
+                    </p>
+                    <p>
+                        I don't just write code; I design systems that scale. I've seen enough "Development Hell" to know that the difference between a unicorn and a ghost-town is the distance between an insight and its execution.
+                    </p>
+                    <p class="text-light font-semibold">
+                        Flight Labs is the laboratory where that distance disappears.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Protocol -->
+    <section id="protocol" class="py-24 md:py-32 px-6 border-t border-light/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16">
+                <span class="font-mono text-xs text-accent tracking-tight mb-6 block">[03 // THE PROTOCOL]</span>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight mb-6">
+                    ZERO TO ONE.<br>14 DAYS.
+                </h2>
+                <p class="text-light/70 text-lg max-w-2xl">
+                    The Flight Launch is our signature move. A fixed-fee, high-intensity engagement to take your raw idea and turn it into a high-performance MVP.
+                </p>
+            </div>
+
+            <div class="border border-light/20 p-8 md:p-12 max-w-3xl">
+                <div class="space-y-6 mb-10">
+                    <div class="flex items-start gap-4">
+                        <span class="font-mono text-xs text-accent whitespace-nowrap">[SPEC 01]</span>
+                        <p class="text-light/80">Architecture: Scalable Next.js/Supabase Stack.</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="font-mono text-xs text-accent whitespace-nowrap">[SPEC 02]</span>
+                        <p class="text-light/80">Design: High-end, "Supreme" Aesthetic.</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="font-mono text-xs text-accent whitespace-nowrap">[SPEC 03]</span>
+                        <p class="text-light/80">Delivery: 14 Business Days.</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="font-mono text-xs text-accent whitespace-nowrap">[SPEC 04]</span>
+                        <p class="text-light font-semibold text-xl">Price: $5,000 USD (Fixed).</p>
+                    </div>
+                </div>
+                <a href="#liftoff" class="inline-block font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors">
+                    [ VIEW THE FULL PROTOCOL ]
                 </a>
             </div>
-
-            <div id="latest-posts" class="grid md:grid-cols-3 gap-6">
-                <!-- Posts loaded via JS -->
-                <div class="col-span-full text-center py-12">
-                    <p class="font-mono text-sm text-light/40">Loading transmissions...</p>
-                </div>
-            </div>
-
-            <a href="/ideas/" class="md:hidden block mt-8 font-mono text-sm text-light/60 hover:text-accent transition-colors text-center">
-                VIEW ALL TRANSMISSIONS →
-            </a>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-24 md:py-32 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <span class="font-mono text-xs text-accent tracking-widest mb-6 block">READY FOR TAKEOFF?</span>
-            <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
-                LET'S BUILD<br>
-                <span class="gradient-text">SOMETHING</span>
-            </h2>
-            <p class="text-light/60 text-lg mb-10 max-w-xl mx-auto">
-                Got an idea that needs velocity? Drop us a line. No pitch decks required—just tell us what you're building.
-            </p>
-            <a href="mailto:hello@flightlabs.studio" class="inline-block font-mono text-sm bg-accent text-dark px-10 py-5 hover:bg-light transition-colors">
-                [ hello@flightlabs.studio ]
-            </a>
+    <!-- The Hangar / Portfolio -->
+    <section id="hangar" class="py-24 md:py-32 px-6 border-t border-light/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16">
+                <span class="font-mono text-xs text-accent tracking-tight mb-6 block">[04 // THE HANGAR]</span>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight">
+                    RECENT DEPLOYMENTS.
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Project 1 -->
+                <div class="border border-light/10 p-6 md:p-8 hover:border-light/30 transition-colors group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <span class="font-mono text-xs text-accent">[PROJECT: REDDIT SIGNALS]</span>
+                            <span class="font-mono text-xs text-light/40">// AI SENTIMENT ENGINE</span>
+                            <span class="font-mono text-xs text-light/40">// BUILT IN 72 HOURS</span>
+                        </div>
+                        <span class="font-mono text-xs text-green-500">STATUS: OPERATIONAL</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="border border-light/10 p-6 md:p-8 hover:border-light/30 transition-colors group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <span class="font-mono text-xs text-accent">[PROJECT: VIBE CODER]</span>
+                            <span class="font-mono text-xs text-light/40">// DEV-TOOL</span>
+                            <span class="font-mono text-xs text-light/40">// 500+ WAITLIST</span>
+                        </div>
+                        <span class="font-mono text-xs text-yellow-500">STATUS: SCALING</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="border border-light/10 p-6 md:p-8 hover:border-light/30 transition-colors group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                            <span class="font-mono text-xs text-accent">[PROJECT: TRACKIFY]</span>
+                            <span class="font-mono text-xs text-light/40">// PRIVACY-FIRST ANALYTICS</span>
+                            <span class="font-mono text-xs text-light/40">// INTERNAL TOOL</span>
+                        </div>
+                        <span class="font-mono text-xs text-green-500">STATUS: OPERATIONAL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <a href="/ideas/" class="font-mono text-sm text-light/60 hover:text-accent transition-colors">
+                    [ EXPLORE ALL FLIGHT LOGS → ]
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Liftoff / CTA -->
+    <section id="liftoff" class="py-24 md:py-32 px-6 border-t border-light/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-3xl">
+                <span class="font-mono text-xs text-accent tracking-tight mb-6 block">[05 // LIFTOFF]</span>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95] tracking-tight mb-8">
+                    READY FOR TAKEOFF?
+                </h2>
+                <div class="space-y-6 text-light/70 text-lg leading-relaxed mb-10">
+                    <p>
+                        We do not work with everyone. We work with visionaries who have a cleared budget and a bias for action.
+                    </p>
+                    <p>
+                        If you need a committee to approve a button color, go elsewhere. If you're ready to win, enter the lab.
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <a href="https://cal.com/flightlabs/audit" target="_blank" class="inline-block font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors">
+                        [ BOOK THE AUDIT — $250 ]
+                    </a>
+                    <p class="font-mono text-xs text-light/40">
+                        Paid call fee is credited toward your first build.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="border-t border-light/10 py-12 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-                    <span class="font-mono text-sm tracking-wider">[ FLIGHT LABS ]</span>
-                    <span class="font-mono text-xs text-light/40">DIGITAL PRODUCT STUDIO</span>
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
+                <div>
+                    <span class="font-mono text-sm tracking-tight block mb-2">FLIGHT LABS // EST. 2025</span>
+                    <span class="font-mono text-xs text-accent">[SYSTEM: NOMINAL]</span>
                 </div>
-                <div class="flex items-center gap-8 font-mono text-xs text-light/40">
-                    <a href="/ideas/" class="hover:text-accent transition-colors">THE RADAR</a>
-                    <a href="#hangar" class="hover:text-accent transition-colors">THE HANGAR</a>
-                    <a href="#protocol" class="hover:text-accent transition-colors">THE PROTOCOL</a>
+                <div class="flex items-center gap-6 font-mono text-xs text-light/40">
+                    <a href="https://twitter.com/flightlabs" target="_blank" class="hover:text-accent transition-colors">TWITTER</a>
+                    <a href="https://github.com/flightlabs" target="_blank" class="hover:text-accent transition-colors">GITHUB</a>
+                    <a href="https://linkedin.com/company/flightlabs" target="_blank" class="hover:text-accent transition-colors">LINKEDIN</a>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-light/10 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="font-mono text-xs text-light/30">© 2024 FLIGHT LABS. ALL SYSTEMS OPERATIONAL.</p>
-                <p class="font-mono text-xs text-light/30">BUILT AT THE SPEED OF THOUGHT</p>
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-8 border-t border-light/10">
+                <div class="flex items-center gap-6 font-mono text-xs text-light/30">
+                    <a href="/ideas/" class="hover:text-light/60 transition-colors">01. THE RADAR</a>
+                    <a href="#hangar" class="hover:text-light/60 transition-colors">02. THE HANGAR</a>
+                    <a href="#protocol" class="hover:text-light/60 transition-colors">03. THE PROTOCOL</a>
+                </div>
+                <p class="font-mono text-xs text-light/30">© 2025 FLIGHT LABS. ALL RIGHTS RESERVED.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Supabase Configuration
-        const SUPABASE_URL = 'https://nckdgmtgdwhraspjynwd.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja2RnbXRnZHdocmFzcGp5bndkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODgyOTEsImV4cCI6MjA4MTE2NDI5MX0._JQQ6JurL-fDuJiYw2oqTmw_IQfLzmlJbklYfddVYY8';
-        
-        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
-        }
-
-        // Load latest blog posts
-        async function loadLatestPosts() {
-            try {
-                const { data: posts, error } = await supabaseClient
-                    .from('blog_posts')
-                    .select('*')
-                    .eq('published', true)
-                    .order('created_at', { ascending: false })
-                    .limit(3);
-
-                if (error) throw error;
-
-                const container = document.getElementById('latest-posts');
-                
-                if (!posts || posts.length === 0) {
-                    container.innerHTML = `
-                        <div class="col-span-full text-center py-12">
-                            <p class="font-mono text-sm text-light/40">No transmissions yet. Check back soon.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                container.innerHTML = posts.map(post => `
-                    <a href="/ideas/${post.slug}.html" class="group border border-light/10 p-6 hover:border-accent/50 transition-all duration-300 border-glow block">
-                        <span class="font-mono text-xs text-light/40 mb-4 block">${formatDate(post.created_at)}</span>
-                        <h3 class="text-xl font-bold mb-3 group-hover:text-accent transition-colors">${post.title}</h3>
-                        <p class="text-light/60 text-sm line-clamp-2">${post.excerpt || post.content.replace(/<[^>]*>/g, '').substring(0, 120) + '...'}</p>
-                    </a>
-                `).join('');
-            } catch (error) {
-                console.error('Error loading posts:', error);
-                document.getElementById('latest-posts').innerHTML = `
-                    <div class="col-span-full text-center py-12">
-                        <p class="font-mono text-sm text-light/40">Failed to load transmissions.</p>
-                    </div>
-                `;
-            }
-        }
-
-        loadLatestPosts();
-    </script>
 </body>
 </html>
