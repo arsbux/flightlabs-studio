@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Admin — Flight Labs Studio</title>
+    <title>Control Panel — Flight Labs</title>
 
     <!-- Analytics -->
     <script defer src="https://data.flightlabs.agency/trackify.js" data-site-id="flightlabs-studio-o71c2"></script>
@@ -12,10 +12,27 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind Play CDN -->
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#050505',
+                        light: '#EDEDED',
+                        accent: '#FF4F00',
+                    }
+                }
+            }
+        }
+    </script>
 
     <!-- Quill Rich Text Editor -->
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -25,53 +42,101 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
+        ::selection { background: #FF4F00; color: #050505; }
+        
+        /* Dark Quill theme overrides */
+        .ql-toolbar.ql-snow {
+            border: 1px solid rgba(237, 237, 237, 0.2);
+            background: rgba(237, 237, 237, 0.05);
+        }
+        .ql-container.ql-snow {
+            border: 1px solid rgba(237, 237, 237, 0.2);
+            background: rgba(237, 237, 237, 0.02);
+        }
         .ql-editor {
             min-height: 400px;
             font-size: 16px;
+            color: #EDEDED;
         }
-        .ql-container {
-            font-family: 'Inter', sans-serif;
+        .ql-editor.ql-blank::before {
+            color: rgba(237, 237, 237, 0.4);
+        }
+        .ql-snow .ql-stroke {
+            stroke: #EDEDED;
+        }
+        .ql-snow .ql-fill {
+            fill: #EDEDED;
+        }
+        .ql-snow .ql-picker {
+            color: #EDEDED;
+        }
+        .ql-snow .ql-picker-options {
+            background: #1a1a1a;
+            border-color: rgba(237, 237, 237, 0.2);
+        }
+        .ql-snow .ql-picker-item:hover {
+            color: #FF4F00;
+        }
+        .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+            border-color: rgba(237, 237, 237, 0.3);
+        }
+        .ql-toolbar.ql-snow button:hover,
+        .ql-toolbar.ql-snow button:focus {
+            color: #FF4F00;
+        }
+        .ql-toolbar.ql-snow button:hover .ql-stroke,
+        .ql-toolbar.ql-snow button:focus .ql-stroke {
+            stroke: #FF4F00;
+        }
+        .ql-toolbar.ql-snow button:hover .ql-fill,
+        .ql-toolbar.ql-snow button:focus .ql-fill {
+            fill: #FF4F00;
         }
     </style>
 </head>
 
-<body class="bg-stone-50 font-sans">
+<body class="bg-dark text-light font-sans antialiased min-h-screen">
 
     <!-- Header -->
-    <header class="bg-white border-b-3 border-black sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <h1 class="text-2xl font-black">Blog Admin</h1>
-            <div class="flex gap-3">
-                <a href="/ideas/" class="px-4 py-2 border-2 border-black font-bold hover:bg-stone-100 transition-colors">
-                    View Blog
+    <header class="border-b border-light/10 sticky top-0 z-50 bg-dark/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-6">
+                <a href="/" class="font-mono text-sm tracking-wider hover:text-accent transition-colors">
+                    [ FLIGHT LABS ]
                 </a>
-                <button onclick="showNewPostForm()" class="px-4 py-2 bg-black text-white border-2 border-black font-bold hover:bg-stone-800 transition-colors">
-                    + New Post
+                <span class="font-mono text-xs text-light/40">// CONTROL PANEL</span>
+            </div>
+            <div class="flex gap-3">
+                <a href="/ideas/" class="font-mono text-xs border border-light/30 px-4 py-2 hover:border-accent hover:text-accent transition-colors">
+                    VIEW RADAR
+                </a>
+                <button onclick="showNewPostForm()" class="font-mono text-xs bg-accent text-dark px-4 py-2 hover:bg-light transition-colors">
+                    [ + NEW POST ]
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-8">
+    <main class="max-w-7xl mx-auto px-6 py-8">
         
         <!-- Post List -->
         <div id="post-list" class="mb-8">
-            <h2 class="text-xl font-black mb-4">All Posts</h2>
+            <h2 class="font-mono text-xs text-accent tracking-widest mb-6">ALL TRANSMISSIONS</h2>
             <div id="posts-container" class="space-y-3">
-                <div class="text-center py-8">
-                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-stone-300 border-t-black"></div>
+                <div class="text-center py-12">
+                    <p class="font-mono text-sm text-light/40">Loading...</p>
                 </div>
             </div>
         </div>
 
         <!-- Post Editor (Hidden by default) -->
         <div id="post-editor" class="hidden">
-            <div class="bg-white border-3 border-black p-6 shadow-lg">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-black" id="editor-title">New Post</h2>
-                    <button onclick="hideEditor()" class="px-4 py-2 border-2 border-black font-bold hover:bg-stone-100">
-                        Cancel
+            <div class="border border-light/10 p-8">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-2xl font-black" id="editor-title">NEW TRANSMISSION</h2>
+                    <button onclick="hideEditor()" class="font-mono text-xs border border-light/30 px-4 py-2 hover:border-accent hover:text-accent transition-colors">
+                        CANCEL
                     </button>
                 </div>
 
@@ -80,76 +145,76 @@
 
                     <!-- Title -->
                     <div>
-                        <label class="block font-bold mb-2">Title *</label>
+                        <label class="block font-mono text-xs text-light/60 mb-2">TITLE *</label>
                         <input type="text" id="post-title" required 
-                               class="w-full px-4 py-3 border-2 border-black focus:outline-none focus:border-blue-500"
+                               class="w-full px-4 py-3 bg-transparent border border-light/20 focus:outline-none focus:border-accent text-light"
                                placeholder="Enter post title">
                     </div>
 
-                    <!-- Slug (auto-generated) -->
+                    <!-- Slug -->
                     <div>
-                        <label class="block font-bold mb-2">Slug (URL)</label>
+                        <label class="block font-mono text-xs text-light/60 mb-2">SLUG (URL)</label>
                         <input type="text" id="post-slug" required 
-                               class="w-full px-4 py-3 border-2 border-black bg-stone-100 focus:outline-none"
+                               class="w-full px-4 py-3 bg-light/5 border border-light/10 focus:outline-none text-light/60 font-mono text-sm"
                                placeholder="auto-generated-from-title" readonly>
                     </div>
 
                     <!-- Excerpt -->
                     <div>
-                        <label class="block font-bold mb-2">Excerpt (Optional)</label>
+                        <label class="block font-mono text-xs text-light/60 mb-2">EXCERPT (OPTIONAL)</label>
                         <textarea id="post-excerpt" rows="3"
-                                  class="w-full px-4 py-3 border-2 border-black focus:outline-none focus:border-blue-500"
+                                  class="w-full px-4 py-3 bg-transparent border border-light/20 focus:outline-none focus:border-accent text-light"
                                   placeholder="Short description for preview"></textarea>
                     </div>
 
                     <!-- Featured Image -->
                     <div>
-                        <label class="block font-bold mb-2">Featured Image</label>
+                        <label class="block font-mono text-xs text-light/60 mb-2">FEATURED IMAGE</label>
                         
                         <!-- Image Preview -->
-                        <div id="image-preview" class="hidden mb-3">
-                            <img id="preview-img" src="" alt="Preview" class="max-w-full h-48 object-cover border-2 border-black">
-                            <button type="button" onclick="removeImage()" class="mt-2 px-3 py-1 bg-red-500 text-white border-2 border-black text-sm font-bold">
-                                Remove Image
+                        <div id="image-preview" class="hidden mb-4">
+                            <img id="preview-img" src="" alt="Preview" class="max-w-full h-48 object-cover border border-light/20">
+                            <button type="button" onclick="removeImage()" class="mt-2 font-mono text-xs text-red-500 hover:text-red-400">
+                                [ REMOVE IMAGE ]
                             </button>
                         </div>
 
                         <!-- Upload Button -->
-                        <div class="flex gap-3 mb-2">
-                            <label class="px-4 py-3 bg-black text-white border-2 border-black font-bold cursor-pointer hover:bg-stone-800 inline-block">
+                        <div class="flex gap-4 items-center mb-3">
+                            <label class="font-mono text-xs bg-light/10 border border-light/20 px-4 py-3 cursor-pointer hover:bg-light/20 transition-colors inline-block">
                                 <input type="file" id="image-upload" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
-                                📁 Upload Image
+                                📁 UPLOAD IMAGE
                             </label>
-                            <span id="upload-status" class="flex items-center text-sm text-stone-500"></span>
+                            <span id="upload-status" class="font-mono text-xs text-light/40"></span>
                         </div>
 
                         <!-- Or paste URL -->
-                        <div class="text-sm text-stone-500 mb-2">Or paste image URL:</div>
+                        <div class="font-mono text-xs text-light/40 mb-2">Or paste image URL:</div>
                         <input type="url" id="post-image" 
-                               class="w-full px-4 py-3 border-2 border-black focus:outline-none focus:border-blue-500"
+                               class="w-full px-4 py-3 bg-transparent border border-light/20 focus:outline-none focus:border-accent text-light"
                                placeholder="https://example.com/image.jpg"
                                onchange="updateImagePreview()">
                     </div>
 
                     <!-- Content Editor -->
                     <div>
-                        <label class="block font-bold mb-2">Content *</label>
-                        <div id="editor" class="border-2 border-black bg-white"></div>
+                        <label class="block font-mono text-xs text-light/60 mb-2">CONTENT *</label>
+                        <div id="editor"></div>
                     </div>
 
                     <!-- Published Status -->
                     <div class="flex items-center gap-3">
-                        <input type="checkbox" id="post-published" class="w-5 h-5">
-                        <label for="post-published" class="font-bold">Published</label>
+                        <input type="checkbox" id="post-published" class="w-5 h-5 accent-accent">
+                        <label for="post-published" class="font-mono text-sm">PUBLISHED</label>
                     </div>
 
                     <!-- Actions -->
-                    <div class="flex gap-3 pt-4">
-                        <button type="submit" class="px-6 py-3 bg-black text-white border-2 border-black font-bold hover:bg-stone-800">
-                            Save Post
+                    <div class="flex gap-4 pt-6 border-t border-light/10">
+                        <button type="submit" class="font-mono text-sm bg-accent text-dark px-8 py-4 hover:bg-light transition-colors">
+                            [ SAVE POST ]
                         </button>
-                        <button type="button" onclick="hideEditor()" class="px-6 py-3 border-2 border-black font-bold hover:bg-stone-100">
-                            Cancel
+                        <button type="button" onclick="hideEditor()" class="font-mono text-sm border border-light/30 px-8 py-4 hover:border-accent hover:text-accent transition-colors">
+                            CANCEL
                         </button>
                     </div>
                 </form>
@@ -158,14 +223,12 @@
     </main>
 
     <script>
-        // Supabase Configuration v3.0 - Always initialize fresh
+        // Supabase Configuration
         const SUPABASE_URL = 'https://nckdgmtgdwhraspjynwd.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ja2RnbXRnZHdocmFzcGp5bndkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1ODgyOTEsImV4cCI6MjA4MTE2NDI5MX0._JQQ6JurL-fDuJiYw2oqTmw_IQfLzmlJbklYfddVYY8';
         
-        // Initialize Supabase client - always create fresh to avoid cache issues
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
-        // Helper functions
         function generateSlug(title) {
             return title
                 .toLowerCase()
@@ -178,7 +241,6 @@
         let quill;
         let currentPostId = null;
 
-        // Initialize Quill editor
         function initEditor() {
             if (!quill) {
                 quill = new Quill('#editor', {
@@ -196,12 +258,11 @@
                             ['clean']
                         ]
                     },
-                    placeholder: 'Write your post content here...'
+                    placeholder: 'Write your transmission here...'
                 });
             }
         }
 
-        // Auto-generate slug from title
         document.addEventListener('DOMContentLoaded', () => {
             initEditor();
             loadPosts();
@@ -216,27 +277,25 @@
             });
         });
 
-        // Show new post form
         function showNewPostForm() {
             currentPostId = null;
-            document.getElementById('editor-title').textContent = 'New Post';
+            document.getElementById('editor-title').textContent = 'NEW TRANSMISSION';
             document.getElementById('post-form').reset();
             document.getElementById('post-id').value = '';
             document.getElementById('post-slug').readOnly = false;
+            document.getElementById('image-preview').classList.add('hidden');
             quill.setContents([]);
             document.getElementById('post-editor').classList.remove('hidden');
             document.getElementById('post-list').classList.add('hidden');
             window.scrollTo(0, 0);
         }
 
-        // Hide editor
         function hideEditor() {
             document.getElementById('post-editor').classList.add('hidden');
             document.getElementById('post-list').classList.remove('hidden');
             currentPostId = null;
         }
 
-        // Load all posts
         async function loadPosts() {
             try {
                 const { data: posts, error } = await supabaseClient
@@ -249,36 +308,36 @@
                 const container = document.getElementById('posts-container');
                 
                 if (posts.length === 0) {
-                    container.innerHTML = '<p class="text-stone-500 text-center py-8">No posts yet. Create your first post!</p>';
+                    container.innerHTML = '<p class="font-mono text-sm text-light/40 text-center py-12">No transmissions yet. Create your first post.</p>';
                     return;
                 }
 
                 container.innerHTML = posts.map(post => `
-                    <div class="bg-white border-2 border-black p-4 flex items-center justify-between hover:bg-stone-50">
+                    <div class="border border-light/10 p-4 flex items-center justify-between hover:border-light/20 transition-colors">
                         <div class="flex-1">
-                            <h3 class="font-bold text-lg">${post.title}</h3>
-                            <p class="text-sm text-stone-500">
-                                ${new Date(post.created_at).toLocaleDateString()} • 
-                                <span class="${post.published ? 'text-green-600' : 'text-orange-600'}">${post.published ? 'Published' : 'Draft'}</span>
+                            <h3 class="font-bold text-lg mb-1">${post.title}</h3>
+                            <p class="font-mono text-xs text-light/40">
+                                ${new Date(post.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase()} 
+                                <span class="mx-2">◆</span>
+                                <span class="${post.published ? 'text-green-500' : 'text-accent'}">${post.published ? 'PUBLISHED' : 'DRAFT'}</span>
                             </p>
                         </div>
                         <div class="flex gap-2">
-                            <button onclick="editPost('${post.id}')" class="px-3 py-1 border-2 border-black font-bold text-sm hover:bg-stone-100">
-                                Edit
+                            <button onclick="editPost('${post.id}')" class="font-mono text-xs border border-light/30 px-3 py-2 hover:border-accent hover:text-accent transition-colors">
+                                EDIT
                             </button>
-                            <button onclick="deletePost('${post.id}', '${post.title.replace(/'/g, "\\'")}')" class="px-3 py-1 bg-red-500 text-white border-2 border-black font-bold text-sm hover:bg-red-600">
-                                Delete
+                            <button onclick="deletePost('${post.id}', '${post.title.replace(/'/g, "\\'")}')" class="font-mono text-xs border border-red-500/50 text-red-500 px-3 py-2 hover:bg-red-500 hover:text-dark transition-colors">
+                                DELETE
                             </button>
                         </div>
                     </div>
                 `).join('');
             } catch (error) {
                 console.error('Error loading posts:', error);
-                document.getElementById('posts-container').innerHTML = '<p class="text-red-500 text-center py-8">Error loading posts</p>';
+                document.getElementById('posts-container').innerHTML = '<p class="font-mono text-sm text-red-500 text-center py-12">Error loading posts</p>';
             }
         }
 
-        // Edit post
         async function editPost(postId) {
             try {
                 const { data: post, error } = await supabaseClient
@@ -290,7 +349,7 @@
                 if (error) throw error;
 
                 currentPostId = postId;
-                document.getElementById('editor-title').textContent = 'Edit Post';
+                document.getElementById('editor-title').textContent = 'EDIT TRANSMISSION';
                 document.getElementById('post-id').value = post.id;
                 document.getElementById('post-title').value = post.title;
                 document.getElementById('post-slug').value = post.slug;
@@ -299,9 +358,7 @@
                 document.getElementById('post-image').value = post.featured_image || '';
                 document.getElementById('post-published').checked = post.published;
                 
-                // Update image preview
                 updateImagePreview();
-                
                 quill.root.innerHTML = post.content;
 
                 document.getElementById('post-editor').classList.remove('hidden');
@@ -313,9 +370,8 @@
             }
         }
 
-        // Delete post
         async function deletePost(postId, title) {
-            if (!confirm(`Are you sure you want to delete "${title}"?`)) return;
+            if (!confirm(`Delete "${title}"?`)) return;
 
             try {
                 const { error } = await supabaseClient
@@ -325,7 +381,7 @@
 
                 if (error) throw error;
 
-                alert('Post deleted successfully');
+                alert('Post deleted');
                 loadPosts();
             } catch (error) {
                 console.error('Error deleting post:', error);
@@ -333,33 +389,28 @@
             }
         }
 
-        // Image upload handler
         async function handleImageUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
 
-            // Validate file type
             if (!file.type.startsWith('image/')) {
                 alert('Please select an image file');
                 return;
             }
 
-            // Validate file size (max 5MB)
             if (file.size > 5 * 1024 * 1024) {
                 alert('Image size must be less than 5MB');
                 return;
             }
 
             const statusEl = document.getElementById('upload-status');
-            statusEl.innerHTML = '<span class="text-blue-600">Uploading...</span>';
+            statusEl.innerHTML = 'Uploading...';
 
             try {
-                // Generate unique filename
                 const fileExt = file.name.split('.').pop();
                 const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
                 const filePath = `${fileName}`;
 
-                // Upload to Supabase Storage - bucket name: blog_images (with underscore)
                 const { data, error } = await supabaseClient.storage
                     .from('blog_images')
                     .upload(filePath, file, {
@@ -369,27 +420,22 @@
 
                 if (error) throw error;
 
-                // Get public URL
                 const { data: { publicUrl } } = supabaseClient.storage
                     .from('blog_images')
                     .getPublicUrl(filePath);
 
-                // Update input and preview
                 document.getElementById('post-image').value = publicUrl;
                 updateImagePreview();
 
-                statusEl.innerHTML = '<span class="text-green-600">✓ Uploaded successfully</span>';
-                setTimeout(() => {
-                    statusEl.innerHTML = '';
-                }, 3000);
+                statusEl.innerHTML = '<span class="text-green-500">✓ Uploaded</span>';
+                setTimeout(() => { statusEl.innerHTML = ''; }, 3000);
             } catch (error) {
                 console.error('Error uploading image:', error);
-                statusEl.innerHTML = '<span class="text-red-600">✗ Upload failed</span>';
+                statusEl.innerHTML = '<span class="text-red-500">✗ Failed</span>';
                 alert('Error uploading image: ' + error.message);
             }
         }
 
-        // Update image preview
         function updateImagePreview() {
             const imageUrl = document.getElementById('post-image').value;
             const previewContainer = document.getElementById('image-preview');
@@ -403,14 +449,12 @@
             }
         }
 
-        // Remove image
         function removeImage() {
             document.getElementById('post-image').value = '';
             document.getElementById('image-preview').classList.add('hidden');
             document.getElementById('image-upload').value = '';
         }
 
-        // Save post
         document.getElementById('post-form').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -438,13 +482,11 @@
 
                 let result;
                 if (currentPostId) {
-                    // Update existing post
                     result = await supabaseClient
                         .from('blog_posts')
                         .update(postData)
                         .eq('id', currentPostId);
                 } else {
-                    // Create new post
                     result = await supabaseClient
                         .from('blog_posts')
                         .insert([postData]);
@@ -452,7 +494,7 @@
 
                 if (result.error) throw result.error;
 
-                alert('Post saved successfully!');
+                alert('Post saved!');
                 hideEditor();
                 loadPosts();
             } catch (error) {
@@ -462,5 +504,4 @@
         });
     </script>
 </body>
-
 </html>

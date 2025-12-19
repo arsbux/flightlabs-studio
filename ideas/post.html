@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="page-title">Loading... — Flight Labs Studio</title>
-    <meta name="description" id="page-description" content="Flight Labs Studio blog post">
+    <title id="page-title">Loading... — Flight Labs</title>
+    <meta name="description" id="page-description" content="Flight Labs transmission">
 
     <!-- Analytics -->
     <script defer src="https://data.flightlabs.agency/trackify.js" data-site-id="flightlabs-studio-o71c2"></script>
@@ -13,23 +13,23 @@
     <!-- Open Graph / Social Share - Updated dynamically -->
     <meta property="og:type" content="article">
     <meta property="og:url" id="og-url" content="">
-    <meta property="og:title" id="og-title" content="Flight Labs Studio">
+    <meta property="og:title" id="og-title" content="Flight Labs">
     <meta property="og:description" id="og-description" content="">
     <meta property="og:image" id="og-image" content="https://flightlabs.studio/socialshare.png">
-    <meta property="og:site_name" content="Flight Labs Studio">
+    <meta property="og:site_name" content="Flight Labs">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" id="twitter-title" content="Flight Labs Studio">
+    <meta name="twitter:title" id="twitter-title" content="Flight Labs">
     <meta name="twitter:description" id="twitter-description" content="">
     <meta name="twitter:image" id="twitter-image" content="https://flightlabs.studio/socialshare.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind Play CDN -->
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -37,67 +37,57 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        marker: ['"Permanent Marker"', 'cursive'],
-                        hand: ['Caveat', 'cursive'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#050505',
+                        light: '#EDEDED',
+                        accent: '#FF4F00',
                     }
                 }
             }
         }
     </script>
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-        .neo-btn {
-            border: 3px solid #1a1a1a;
-            box-shadow: 4px 4px 0 #1a1a1a;
-            transition: all 0.15s ease;
-        }
-        .neo-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 #1a1a1a;
-        }
-        .neo-card {
-            border: 3px solid #1a1a1a;
-            box-shadow: 6px 6px 0 #1a1a1a;
-            background: white;
-        }
+        ::selection { background: #FF4F00; color: #050505; }
         
         /* Blog content styling */
         .blog-content {
             font-size: 18px;
             line-height: 1.8;
+            color: rgba(237, 237, 237, 0.8);
         }
-        .blog-content h1 { font-size: 2.5em; font-weight: 900; margin: 1.5em 0 0.5em; }
-        .blog-content h2 { font-size: 2em; font-weight: 800; margin: 1.5em 0 0.5em; }
-        .blog-content h3 { font-size: 1.5em; font-weight: 700; margin: 1.5em 0 0.5em; }
-        .blog-content h4 { font-size: 1.25em; font-weight: 700; margin: 1.5em 0 0.5em; }
+        .blog-content h1 { font-size: 2.5em; font-weight: 900; margin: 1.5em 0 0.5em; color: #EDEDED; }
+        .blog-content h2 { font-size: 2em; font-weight: 800; margin: 1.5em 0 0.5em; color: #EDEDED; }
+        .blog-content h3 { font-size: 1.5em; font-weight: 700; margin: 1.5em 0 0.5em; color: #EDEDED; }
+        .blog-content h4 { font-size: 1.25em; font-weight: 700; margin: 1.5em 0 0.5em; color: #EDEDED; }
         .blog-content p { margin: 1em 0; }
         .blog-content ul, .blog-content ol { margin: 1em 0; padding-left: 2em; }
         .blog-content li { margin: 0.5em 0; }
         .blog-content blockquote {
-            border-left: 4px solid #1a1a1a;
+            border-left: 3px solid #FF4F00;
             padding-left: 1.5em;
             margin: 1.5em 0;
             font-style: italic;
-            color: #57534e;
+            color: rgba(237, 237, 237, 0.6);
         }
         .blog-content pre {
-            background: #1a1a1a;
-            color: #fff;
+            background: rgba(237, 237, 237, 0.05);
+            border: 1px solid rgba(237, 237, 237, 0.1);
             padding: 1.5em;
-            border-radius: 8px;
             overflow-x: auto;
             margin: 1.5em 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
         }
         .blog-content code {
-            background: #f5f5f4;
+            background: rgba(237, 237, 237, 0.1);
             padding: 0.2em 0.4em;
-            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9em;
         }
         .blog-content pre code {
@@ -108,12 +98,15 @@
             max-width: 100%;
             height: auto;
             margin: 2em 0;
-            border: 3px solid #1a1a1a;
+            border: 1px solid rgba(237, 237, 237, 0.1);
         }
         .blog-content a {
-            color: #e63946;
+            color: #FF4F00;
             text-decoration: underline;
-            font-weight: 600;
+            text-underline-offset: 3px;
+        }
+        .blog-content a:hover {
+            color: #EDEDED;
         }
         .blog-content table {
             width: 100%;
@@ -122,94 +115,113 @@
         }
         .blog-content table th,
         .blog-content table td {
-            border: 2px solid #1a1a1a;
+            border: 1px solid rgba(237, 237, 237, 0.2);
             padding: 0.75em;
             text-align: left;
         }
         .blog-content table th {
-            background: #f5f5f4;
+            background: rgba(237, 237, 237, 0.05);
             font-weight: 700;
+            color: #EDEDED;
+        }
+        .blog-content strong {
+            color: #EDEDED;
+            font-weight: 600;
         }
     </style>
 </head>
 
-<body class="bg-stone-50 text-stone-900 font-sans">
+<body class="bg-dark text-light font-sans antialiased">
 
-    <!-- Navbar -->
-    <nav class="fixed top-2 sm:top-4 left-0 w-full z-50 pointer-events-none">
-        <div class="max-w-5xl mx-auto flex justify-center pointer-events-auto px-2 sm:px-4">
-            <div class="bg-white neo-card px-2 sm:px-3 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-4 md:gap-6 w-full sm:w-auto">
-                <a href="/" class="px-2 sm:px-4 py-1.5 sm:py-2 font-marker text-base sm:text-xl tracking-tight hover:text-red-600 transition-colors">
-                    FLIGHT LABS
-                </a>
-
-                <div class="hidden md:flex gap-1">
-                    <a href="/#studio" class="px-4 py-2 font-bold text-sm hover:bg-yellow-200 transition-colors">Studio</a>
-                    <a href="/#projects" class="px-4 py-2 font-bold text-sm hover:bg-yellow-200 transition-colors">Projects</a>
-                    <a href="/ideas/" class="px-4 py-2 font-bold text-sm bg-yellow-200">Ideas</a>
-                    <a href="/#pricing" class="px-4 py-2 font-bold text-sm hover:bg-yellow-200 transition-colors">Pricing</a>
-                </div>
-
-                <a href="https://flightlabs.agency" class="neo-btn bg-black text-white px-3 sm:px-5 py-1.5 sm:py-2 font-bold text-xs sm:text-sm">
-                    Start a Project
-                </a>
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 w-full z-50 border-b border-light/10 bg-dark/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="font-mono text-sm tracking-wider hover:text-accent transition-colors">
+                [ FLIGHT LABS ]
+            </a>
+            <div class="hidden md:flex items-center gap-8 font-mono text-xs tracking-wider">
+                <a href="/#hangar" class="hover:text-accent transition-colors">THE HANGAR</a>
+                <a href="/#protocol" class="hover:text-accent transition-colors">THE PROTOCOL</a>
+                <a href="/ideas/" class="text-accent">THE RADAR</a>
             </div>
+            <a href="/#protocol" class="font-mono text-xs bg-accent text-dark px-4 py-2 hover:bg-light transition-colors">
+                [ INITIATE PROTOCOL ]
+            </a>
         </div>
     </nav>
 
     <!-- Loading State -->
     <div id="loading" class="min-h-screen flex items-center justify-center">
         <div class="text-center">
-            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-stone-300 border-t-red-600"></div>
-            <p class="mt-4 text-stone-500 font-hand">Loading post...</p>
+            <p class="font-mono text-sm text-light/40">Loading transmission...</p>
         </div>
     </div>
 
     <!-- Post Content -->
     <article id="post-content" class="hidden">
-        <!-- Post Header - Title & Excerpt First -->
-        <header class="max-w-3xl mx-auto px-4 pt-32 pb-8 sm:pt-40 sm:pb-12 text-center">
-            <div class="flex items-center justify-center gap-3 text-sm text-stone-500 mb-6">
+        <!-- Post Header -->
+        <header class="max-w-3xl mx-auto px-6 pt-32 pb-12 text-center">
+            <div class="flex items-center justify-center gap-3 font-mono text-xs text-light/40 mb-8">
                 <span id="post-date"></span>
-                <span>•</span>
+                <span class="text-accent">◆</span>
                 <span id="post-reading-time"></span>
             </div>
             <h1 id="post-title" class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 leading-tight"></h1>
-            <p id="post-excerpt" class="text-lg sm:text-xl text-stone-600 max-w-2xl mx-auto"></p>
+            <p id="post-excerpt" class="text-lg text-light/60 max-w-2xl mx-auto"></p>
         </header>
 
-        <!-- Featured Image - Below Title & Excerpt -->
+        <!-- Featured Image -->
         <div id="featured-image-container" class="hidden mb-12">
-            <div class="w-full aspect-[21/9] bg-stone-200 overflow-hidden">
+            <div class="w-full aspect-[21/9] bg-dark overflow-hidden border-y border-light/10">
                 <img id="featured-image" src="" alt="" class="w-full h-full object-cover">
             </div>
         </div>
 
         <!-- Post Body -->
-        <div class="max-w-3xl mx-auto px-4 pb-16">
+        <div class="max-w-3xl mx-auto px-6 pb-16">
             <div id="post-body" class="blog-content"></div>
         </div>
 
-        <!-- Back to Blog -->
-        <div class="max-w-3xl mx-auto px-4 pb-24">
-            <a href="/ideas/" class="neo-btn bg-white text-black px-6 py-3 font-bold inline-flex items-center gap-2">
-                <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                Back to Ideas
+        <!-- Back to Radar -->
+        <div class="max-w-3xl mx-auto px-6 pb-24">
+            <a href="/ideas/" class="inline-flex items-center gap-3 font-mono text-sm text-light/60 hover:text-accent transition-colors">
+                <span>←</span>
+                <span>BACK TO THE RADAR</span>
             </a>
         </div>
     </article>
 
     <!-- Error State -->
     <div id="error" class="hidden min-h-screen flex items-center justify-center">
-        <div class="text-center max-w-md px-4">
-            <h1 class="text-4xl font-black mb-4">Post Not Found</h1>
-            <p class="text-stone-600 mb-8">The post you're looking for doesn't exist or has been removed.</p>
-            <a href="/ideas/" class="neo-btn bg-black text-white px-6 py-3 font-bold inline-flex items-center gap-2">
-                <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                Back to Ideas
+        <div class="text-center max-w-md px-6">
+            <span class="font-mono text-xs text-accent tracking-widest mb-6 block">ERROR 404</span>
+            <h1 class="text-4xl font-black mb-4">TRANSMISSION NOT FOUND</h1>
+            <p class="text-light/60 mb-8">The post you're looking for doesn't exist or has been removed.</p>
+            <a href="/ideas/" class="inline-block font-mono text-sm border border-light/30 px-6 py-3 hover:border-accent hover:text-accent transition-colors">
+                [ BACK TO THE RADAR ]
             </a>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-light/10 py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                    <a href="/" class="font-mono text-sm tracking-wider hover:text-accent transition-colors">[ FLIGHT LABS ]</a>
+                    <span class="font-mono text-xs text-light/40">DIGITAL PRODUCT STUDIO</span>
+                </div>
+                <div class="flex items-center gap-8 font-mono text-xs text-light/40">
+                    <a href="/ideas/" class="text-accent">THE RADAR</a>
+                    <a href="/#hangar" class="hover:text-accent transition-colors">THE HANGAR</a>
+                    <a href="/#protocol" class="hover:text-accent transition-colors">THE PROTOCOL</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-light/10 text-center md:text-left">
+                <p class="font-mono text-xs text-light/30">© 2024 FLIGHT LABS. ALL SYSTEMS OPERATIONAL.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // Supabase Configuration
@@ -219,18 +231,17 @@
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('en-US', options);
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
         }
 
         function getReadingTime(content) {
             const wordsPerMinute = 200;
-            const words = content.trim().split(/\s+/).length;
+            const text = content.replace(/<[^>]*>/g, '');
+            const words = text.trim().split(/\s+/).length;
             const minutes = Math.ceil(words / wordsPerMinute);
-            return `${minutes} min read`;
+            return `${minutes} MIN READ`;
         }
-
-        lucide.createIcons();
 
         // Get slug from query params (Vercel rewrite) or URL path
         const urlParams = new URLSearchParams(window.location.search);
@@ -255,7 +266,7 @@
                 const shareImage = post.featured_image || 'https://flightlabs.studio/socialshare.png';
 
                 // Update page meta
-                document.getElementById('page-title').textContent = `${post.title} — Flight Labs Studio`;
+                document.getElementById('page-title').textContent = `${post.title} — Flight Labs`;
                 document.getElementById('page-description').content = description;
 
                 // Update Open Graph meta tags
@@ -287,17 +298,14 @@
 
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('post-content').classList.remove('hidden');
-                lucide.createIcons();
             } catch (error) {
                 console.error('Error loading post:', error);
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('error').classList.remove('hidden');
-                lucide.createIcons();
             }
         }
 
         loadPost();
     </script>
 </body>
-
 </html>
